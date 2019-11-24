@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="entity"
+            type="com.example.seriestracker.database.SeriesListEntity" />
+        <variable
+            name="clickListener"
+            type="com.example.seriestracker.adapters.SeriesListEntityListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/checkmark"
+            android:layout_width="@dimen/checkmark_width"
+            android:layout_height="@dimen/checkmark_height"
+            android:contentDescription="@string/checkmark_description_string"
+            android:onClick="@{() -> clickListener.onClickedCheckmark(entity)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/list_item_finish_icon_png"
+            tools:srcCompat="@drawable/list_item_finish_icon_png" />
+            <!--TODO -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/text_holder_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:onClick="@{() -> clickListener.onClickedText(entity)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/constraint_season"
+            app:layout_constraintStart_toEndOf="@+id/checkmark"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <!--TODO add   app:titleText="@{entity}"   -->
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is the Title of the Show"
+                app:layout_constraintBottom_toTopOf="@+id/text_extras"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--TODO add    app:extrasText="@{entity}"   -->
+            <TextView
+                android:id="@+id/text_extras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Extra info about show"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_title" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_season"
+            android:layout_width="75dp"
+            android:layout_height="0dp"
+            android:onClick="@{() -> clickListener.onClickedSeason(entity)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/constraint_episode"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/text_holder_layout"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <TextView
+                android:id="@+id/text_Season_S"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="S"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/text_season_number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--TODO add     app:season="@{entity}"   -->
+            <TextView
+                android:id="@+id/text_season_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="88"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/divider_season"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/text_Season_S"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/divider_season"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="#AFAFAF"
+                android:contentDescription="@string/divider_season_description_string"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/text_season_number"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_season_number"
+                app:layout_constraintTop_toBottomOf="@+id/text_season_number"
+                app:layout_constraintVertical_bias="0.844"
+                app:srcCompat="@android:drawable/divider_horizontal_textfield" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_episode"
+            android:layout_width="75dp"
+            android:layout_height="0dp"
+            android:onClick="@{() -> clickListener.onClickedEpisode(entity)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/constraint_season"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <TextView
+                android:id="@+id/text_episode_e"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/divider_episode"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--TODO add      app:episode="@{entity}"   -->
+            <TextView
+                android:id="@+id/text_episode_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="88"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/divider_episode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/text_episode_e"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/divider_episode"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="#AFAFAF"
+                android:contentDescription="@string/divider_season_description_string"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/text_episode_number"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_episode_number"
+                app:layout_constraintTop_toBottomOf="@+id/text_episode_number"
+                app:layout_constraintVertical_bias="0.844"
+                app:srcCompat="@android:drawable/divider_horizontal_textfield" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

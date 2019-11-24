@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!-- TODO Add data binding to get and edit card -->
+        <!--<variable
+            name="viewModel"
+            type="com.example.seriestracker.ui.main.MainViewModel" />
+        <variable
+            name="card"
+            type="" />-->
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/addSeriesFragmentTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/card_title_edit"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- TODO Get title text from card -->
+        <EditText
+            android:id="@+id/addSeriesEnterTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/card_edit_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addSeriesFragmentTitle" />
+
+        <!-- TODO Get extras text from card -->
+        <EditText
+            android:id="@+id/editSeriesEnterExtras"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/card_edit_extras"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addSeriesEnterTitle" />
+
+        <TextView
+            android:id="@+id/editSeriesListingTypeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/card_edit_listingType"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editSeriesListingTypeHolder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editSeriesListingTypeHolder" />
+
+        <!--TODO Add Onclick listener to group to toggle which is active -->
+        <RadioGroup
+            android:id="@+id/editSeriesListingTypeHolder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/editSeriesListingTypeText"
+            app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterExtras">
+
+            <!--TODO Add binding listeners to radio button, like in example code -->
+            <RadioButton
+                android:id="@+id/radioButtonSPlusE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Season + Episode" />
+
+            <!--TODO Add binding listeners to radio button, like in example code -->
+            <RadioButton
+                android:id="@+id/radioButtonEOnly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Episode Only" />
+
+        </RadioGroup>
+
+
+        <TextView
+            android:id="@+id/editSeriesSeasonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/card_edit_season"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editSeriesEnterSeason"
+            app:layout_constraintEnd_toStartOf="@+id/editSeriesEnterSeason"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editSeriesEnterSeason" />
+
+        <!-- TODO Get formatted season from card -->
+        <EditText
+            android:id="@+id/editSeriesEnterSeason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:inputType="number"
+            android:text="00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editSeriesListingTypeHolder" />
+
+        <TextView
+            android:id="@+id/addSeriesEpisodeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/card_edit_episode"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editSeriesEnterEpisode"
+            app:layout_constraintEnd_toStartOf="@+id/editSeriesEnterEpisode"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editSeriesEnterEpisode" />
+
+        <!-- TODO Get formatted episode from card -->
+        <EditText
+            android:id="@+id/editSeriesEnterEpisode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:inputType="number"
+            android:text="00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterSeason" />
+
+        <TextView
+            android:id="@+id/editSeriesFinishedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/card_edit_finished"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editSeriesFinishedChip"
+            app:layout_constraintEnd_toStartOf="@+id/editSeriesFinishedChip"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editSeriesFinishedChip" />
+
+        <!-- TODO Get checked status from card, much like the radio buttons -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/editSeriesFinishedChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/editSeriesEnterEpisode"
+            app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterEpisode" />
+
+        <!-- TODO Set Click listener to update database with new card values -->
+        <Button
+            android:id="@+id/editSeriesAddCardButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/card_add_add_card_button"
+            android:textColor="#00B800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/editSeriesCancelButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editSeriesFinishedChip"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <!-- TODO Set Click listener to cancel card updates -->
+        <Button
+            android:id="@+id/editSeriesCancelButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/card_add_cancel_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/editSeriesDeleteButton"
+            app:layout_constraintStart_toEndOf="@+id/editSeriesAddCardButton"
+            app:layout_constraintTop_toTopOf="@+id/editSeriesAddCardButton" />
+
+        <!-- TODO Set Click listener to delete database entry -->
+        <Button
+            android:id="@+id/editSeriesDeleteButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/card_edit_delete_button"
+            android:textColor="#B80000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/editSeriesCancelButton"
+            app:layout_constraintTop_toTopOf="@+id/editSeriesAddCardButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

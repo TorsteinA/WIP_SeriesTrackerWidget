@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/mainListFragment">
+
+    <fragment
+        android:id="@+id/mainListFragment"
+        android:name="com.example.seriestracker.mainList.MainListFragment"
+        android:label="main_list_fragment"
+        tools:layout="@layout/fragment_main_list">
+        <action
+            android:id="@+id/action_mainFragment_to_addSeriesListEntityFragment"
+            app:destination="@id/addSeriesListEntityFragment"
+            app:popUpTo="@+id/mainListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSeriesListEntityFragment"
+        android:name="com.example.seriestracker.addSeriesListEntity.AddSeriesListEntityFragment"
+        android:label="AddSeriesListEntityFragment"
+        tools:layout="@layout/fragment_add_new_series_list_entity" >
+        <!--<argument
+            android:name="listEntityId"
+            app:argType="long" />-->
+        <action
+            android:id="@+id/action_addSeriesListEntityFragment_to_mainFragment"
+            app:destination="@id/mainListFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,131 @@
+<resources>
+    <string name="app_name">Series Tracker 0.0.1</string>
+
+    <!-- For when app is opened -->
+    <string name="in_app_message">This is a Widget App. \nPlease add it to your homescreen to use it</string>
+
+    <!--For main activity-->
+    <string name="section_watching">WATCHING</string>
+    <string name="section_watched">WATCHED</string>
+
+    <!--For Cards activities - Titles -->
+    <string name="card_title_rearrange">REARRANGE CARDS</string>
+    <string name="card_title_add">ADD CARD</string>
+    <string name="card_title_edit">EDIT CARD</string>
+
+    <!--For Cards activities - Activity Content -->
+    <string name="card_edit_title">Enter Title</string>
+    <string name="card_edit_extras">Enter Extra Info (optional)</string>
+    <string name="card_edit_finished">Finished: </string>
+    <string name="card_edit_listingType">Listing Type: </string>
+    <string name="card_edit_season">Season: </string>
+    <string name="card_edit_episode">Episode: </string>
+    <string name="card_add_add_card_button">Add Card</string>
+    <string name="card_add_cancel_button">Cancel</string>
+    <string name="card_edit_delete_button">Delete</string>
+
+    <string name="dev_notes">
+    Android Series app:
+     Widget
+     Transparent dark background with white text
+     Stored locally / On GDrive?
+     Elements:
+     Title
+     Season (with +)
+     Episode (with +)
+     More info
+     Can set a few things on element creation
+     Episode Count type:
+     S_x E_y
+     E_yyy
+     Title
+     Extra Info (Like where you watch it)
+     Episode count resets to 0 when pressing Season+
+     Hold on Episode or Season to enter manually
+     Swipe on element to mark as finished watching
+     Added to list at bottom with a divider in bold text
+     Can swipe to add back to top (and remembers S+E)
+     If new season is announced or whatnot
+     Swipe up/down to scroll through list
+
+     List Object
+     List of ListElements
+
+     List Element Object
+     string title
+     uint season
+     uint episode
+     string extraInfo
+     bool isFinished;
+     void IterateEpisode();
+     episode++;
+     void IterateSeason();
+     season++;
+     episode = 0;
+     void Initialize(title, extraInfo = null);
+     this.title = title;
+     if (extraInfo != null) this.exInfo = exInfo;
+     episode = 0;
+     season = 0;
+     void Finish();
+     isFinished = true;
+     void UnFinish();
+     isFinished = false;
+
+
+
+
+
+    // List item: (Card?)
+    //   three types (Really two kinds of cards, and a section item used exactly twice)
+
+    //     Section
+    //       Contains a clickable, immutable string (watch ing/ed)
+    //       Contains a clickable, immutable image
+
+    //     Card S+E
+    //       Contains a clickable image (checkmark when unfinished, square when finished)
+    //       Contains a clickable text area
+    //         Contains a mutable Title text
+    //         Contains a mutable ExtraInfo text
+    //       Contains a clickable Season area
+    //         Contains an immutable S char
+    //         Contains an immutable ___ line
+    //         Contains a mutable number
+    //       Contains a clickable Episode area
+    //         Contains an immutable E char
+    //         Contains an immutable ___ line
+    //         Contains a mutable number
+
+    //     Card E
+    //       Contains a clickable image (checkmark when unfinished, square when finished)
+    //       Contains a clickable text area
+    //         Contains a mutable Title text
+    //         Contains a mutable ExtraInfo text
+    //       Contains a clickable Episode area
+    //         Contains an immutable E char
+    //         Contains an immutable ___ line
+    //         Contains a mutable number
+
+
+
+    // ListCard Object : Card
+    //  String title
+    //  String extras
+    //  Boolean finished
+    //  Int season
+    //  Int episode
+    //  CardType type
+    </string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="checkmark_description_string">checkmark</string>
+    <string name="divider_season_description_string">divider season</string>
+    <string name="add_new_series_button_text">Add New Series</string>
+    <string name="add_card_listing_type_e_only">Episode Only</string>
+    <string name="add_card_listing_type_s_plus_e">Season + Episode</string>
+    <string name="add_card_number_hint">00</string>
+
+
+</resources>
