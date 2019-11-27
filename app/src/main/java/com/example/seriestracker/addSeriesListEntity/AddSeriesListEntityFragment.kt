@@ -66,12 +66,9 @@ class AddSeriesListEntityFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?)
             {
                 var seasonText = p0.toString()
-                if (seasonText != "")                {
-                    var seasonNumber = seasonText.toInt()
-                    viewModel.setSeason(seasonNumber)
-                } else {
-                    viewModel.setSeason(0)
-                }
+                var seasonNum = 0
+                if (seasonText.isNotEmpty()) { seasonNum = seasonText.toInt() }
+                viewModel.setSeason(seasonNum)
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -83,12 +80,9 @@ class AddSeriesListEntityFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?)
             {
                 var episodeText = p0.toString()
-                if (episodeText != "")                {
-                    var episodeNumber = episodeText.toInt()
-                    viewModel.setEpisode(episodeNumber)
-                } else {
-                    viewModel.setEpisode(0)
-                }
+                var episodeNum = 0
+                if (episodeText.isNotEmpty()) { episodeNum = episodeText.toInt() }
+                viewModel.setEpisode(episodeNum)
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
