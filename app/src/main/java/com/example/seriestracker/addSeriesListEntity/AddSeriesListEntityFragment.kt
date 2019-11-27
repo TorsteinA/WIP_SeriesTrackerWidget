@@ -1,6 +1,8 @@
 package com.example.seriestracker.addSeriesListEntity
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +15,11 @@ import com.example.seriestracker.R
 import com.example.seriestracker.database.SeriesListEntityDatabase
 import com.example.seriestracker.databinding.FragmentAddNewSeriesListEntityBinding
 import com.example.seriestracker.hideKeyboard
+import kotlinx.android.synthetic.main.fragment_add_new_series_list_entity.*
 
 class AddSeriesListEntityFragment : Fragment() {
+
+    lateinit var viewModel : AddSeriesListEntityViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,18 +30,15 @@ class AddSeriesListEntityFragment : Fragment() {
         val binding: FragmentAddNewSeriesListEntityBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_add_new_series_list_entity, container, false)
         val application = requireNotNull(this.activity).application
-
-        //val arguments = AddSeriesListEntityFragmentArgs.fromBundle(arguments!!)
-
         val dataSource = SeriesListEntityDatabase.getInstance(application).seriesListEntityDatabaseDao
         val viewModelFactory = AddSeriesListEntityViewModelFactory( dataSource )//, arguments.listEntityId )
-
         val seriesListEntityViewModel = ViewModelProviders.of(
             this, viewModelFactory).get(AddSeriesListEntityViewModel::class.java)
 
         binding.seriesListEntityViewModel = seriesListEntityViewModel
         binding.lifecycleOwner = this
 
+        viewModel = seriesListEntityViewModel
 
         // Observer for Navigation back to Main List
         seriesListEntityViewModel.navigateToMainList.observe(this, Observer {
@@ -51,6 +53,45 @@ class AddSeriesListEntityFragment : Fragment() {
             }
         })
 
+
         return binding.root
+    }
+
+    // EditText's not available in OnCreateView, but are accessible in OnViewCreated.
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        // Observer for listening to season
+        editSeriesEnterSeason.addTextChangedListener(object : TextWatcher
+        {
+            override fun afterTextChanged(p0: Editable?)
+            {
+                var seasonText = p0.toString()
+                if (seasonText != "")                {
+                    var seasonNumber = seasonText.toInt()
+                    viewModel.setSeason(seasonNumber)
+                } else {
+                    viewModel.setSeason(0)
+                }
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+
+        // Observer for listening to episode
+        editSeriesEnterEpisode.addTextChangedListener(object : TextWatcher
+        {
+            override fun afterTextChanged(p0: Editable?)
+            {
+                var episodeText = p0.toString()
+                if (episodeText != "")                {
+                    var episodeNumber = episodeText.toInt()
+                    viewModel.setEpisode(episodeNumber)
+                } else {
+                    viewModel.setEpisode(0)
+                }
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
     }
 }

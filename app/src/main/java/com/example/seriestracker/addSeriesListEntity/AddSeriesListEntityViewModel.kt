@@ -34,7 +34,9 @@ class AddSeriesListEntityViewModel(
     fun getTitle() = title
     fun getExtras() = extras
     fun getSeason() = season
+    fun setSeason(s: Int) { season.value = s}
     fun getEpisode() = episode
+    fun setEpisode(e: Int) { episode.value = e}
 
     private var _navigateToMainList = MutableLiveData<Boolean>()
     val navigateToMainList: LiveData<Boolean>
@@ -59,6 +61,8 @@ class AddSeriesListEntityViewModel(
 
         _navigateToMainList.value = true
     }
+
+
 
     // Database functions
     private suspend fun update(entity: SeriesListEntity) = withContext(Dispatchers.IO) { database.update(entity) }

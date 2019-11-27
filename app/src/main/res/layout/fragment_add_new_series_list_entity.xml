@@ -118,6 +118,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editSeriesEnterSeason" />
 
+
+<!--        android:text="@={`` + seriesListEntityViewModel.season}"       -->
         <EditText
             android:id="@+id/editSeriesEnterSeason"
             android:layout_width="wrap_content"
@@ -127,7 +129,8 @@
             android:ems="10"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:text="@={`` + seriesListEntityViewModel.season}"
+            android:hint="Enter season number"
+            android:text=""
             app:layout_constraintBottom_toTopOf="@+id/editSeriesEnterEpisode"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/editSeriesSeasonText"
@@ -146,6 +149,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editSeriesEnterEpisode" />
 
+
+<!--        android:text="@={`` + seriesListEntityViewModel.episode}"       -->
         <EditText
             android:id="@+id/editSeriesEnterEpisode"
             android:layout_width="wrap_content"
@@ -155,7 +160,8 @@
             android:ems="10"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:text="@={`` + seriesListEntityViewModel.episode}"
+            android:hint="Enter episode number"
+            android:text=""
             app:layout_constraintBottom_toTopOf="@+id/seriesEntityFinishedChipGroup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/addSeriesEpisodeText"
@@ -174,7 +180,7 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/seriesEntityFinishedChipGroup"
-            android:layout_width="35dp"
+            android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
