@@ -21,12 +21,8 @@ class AddSeriesListEntityFragment : Fragment() {
 
     lateinit var viewModel : AddSeriesListEntityViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View?
+    {
         val binding: FragmentAddNewSeriesListEntityBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_add_new_series_list_entity, container, false)
         val application = requireNotNull(this.activity).application
@@ -43,7 +39,6 @@ class AddSeriesListEntityFragment : Fragment() {
 
         return binding.root
     }
-
 
     // EditText's not available in OnCreateView, but are accessible in OnViewCreated.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

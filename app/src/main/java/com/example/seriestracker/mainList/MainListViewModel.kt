@@ -39,22 +39,11 @@ class MainListViewModel(
         }
     }
 
-    private suspend fun insert(entity: SeriesListEntity) {
+    private suspend fun get(entity: SeriesListEntity) {
         withContext(Dispatchers.IO) {
-            database.insert(entity)
+            database.get(entity.entityId)
         }
     }
-
-
-//    init {
-//        uiScope.launch {
-//            withContext(Dispatchers.IO){
-//                //val newEntity = SeriesListEntity()
-//                //insert(newEntity)
-//            }
-//        }
-//    }
-
 
     /**
      * Execute when the Add Card button is pressed (Later when the Header is clicked)
@@ -65,7 +54,8 @@ class MainListViewModel(
 
     fun onClickedEntity(entityId: Long) {
         _showSnackbarEvent.value = entityId
-        // TODO Replace with navigation to edit-fragment with entityId as value rather than true
+        // TODO Replace with navigation to edit-fragment with entityId as value rather than true when pressing textarea
+
     }
 
 }

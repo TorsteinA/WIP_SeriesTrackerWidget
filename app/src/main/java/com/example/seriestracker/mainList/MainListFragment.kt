@@ -16,24 +16,20 @@ import com.example.seriestracker.databinding.FragmentMainListBinding
 import com.example.seriestracker.adapters.SeriesListEntityAdapter
 import com.example.seriestracker.adapters.SeriesListEntityListener
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.header.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class MainListFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    lateinit var viewModel: MainListViewModel
 
+    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         val binding: FragmentMainListBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_main_list, container, false)
         val application = requireNotNull(this.activity).application
         val dataSource = SeriesListEntityDatabase.getInstance(application).seriesListEntityDatabaseDao
-        val mainListViewModelFactory =
-            MainListViewModelFactory(
-                dataSource,
-                application
-            )
+        val mainListViewModelFactory = MainListViewModelFactory( dataSource, application )
         val mainListViewModel = ViewModelProviders.of( this, mainListViewModelFactory).get(
             MainListViewModel::class.java)
 
@@ -54,6 +50,7 @@ class MainListFragment : Fragment() {
             } )
         binding.entityList.adapter = adapter
 
+        viewModel = mainListViewModel
 
         // Observers
         mainListViewModel.entities.observe(viewLifecycleOwner, Observer {
@@ -86,5 +83,20 @@ class MainListFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        list_header.setOnClickListener {
+//            run {
+//                this.findNavController().navigate(
+//                    MainListFragmentDirections.actionMainFragmentToAddSeriesListEntityFragment()
+//                )
+//
+//                // Make sure to only navigate once, even if the device has a configuration change
+//                viewModel.doneNavigatingToAddNewEntity()
+//            }
+//        }
     }
 }

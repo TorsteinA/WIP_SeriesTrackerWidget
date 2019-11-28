@@ -27,7 +27,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/list_item_finish_icon_png"
             tools:srcCompat="@drawable/list_item_finish_icon_png" />
-            <!--TODO -->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/text_holder_layout"
@@ -40,28 +39,28 @@
             app:layout_constraintStart_toEndOf="@+id/checkmark"
             app:layout_constraintTop_toTopOf="parent" >
 
-            <!--TODO add   app:titleText="@{entity}"   -->
             <TextView
                 android:id="@+id/text_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This is the Title of the Show"
+                android:text="@{entity.title}"
                 app:layout_constraintBottom_toTopOf="@+id/text_extras"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Title of the Show" />
 
-            <!--TODO add    app:extrasText="@{entity}"   -->
             <TextView
                 android:id="@+id/text_extras"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Extra info about show"
-                android:textSize="10sp"
+                android:text="@{entity.extras}"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_title" />
+                app:layout_constraintTop_toBottomOf="@id/text_title"
+                tools:text="Extras about show" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -79,7 +78,7 @@
                 android:id="@+id/text_Season_S"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="S"
+                android:text="@string/season_s"
                 android:textSize="40sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -87,19 +86,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--TODO add     app:season="@{entity}"   -->
             <TextView
                 android:id="@+id/text_season_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="88"
+                android:text="@{`` + entity.season}"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/divider_season"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/text_Season_S"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="88" />
 
             <ImageView
                 android:id="@+id/divider_season"
@@ -116,7 +115,6 @@
                 app:srcCompat="@android:drawable/divider_horizontal_textfield" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_episode"
             android:layout_width="75dp"
@@ -132,7 +130,7 @@
                 android:id="@+id/text_episode_e"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="E"
+                android:text="@string/episode_e"
                 android:textSize="40sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -140,19 +138,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--TODO add      app:episode="@{entity}"   -->
+
+
             <TextView
                 android:id="@+id/text_episode_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="88"
+                android:text="@{`` + entity.episode}"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/divider_episode"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.47"
                 app:layout_constraintStart_toEndOf="@+id/text_episode_e"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="88" />
 
             <ImageView
                 android:id="@+id/divider_episode"

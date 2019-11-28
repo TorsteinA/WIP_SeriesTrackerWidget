@@ -128,6 +128,8 @@
     <string name="add_card_number_hint">00</string>
     <string name="enter_season_number">Enter season number</string>
     <string name="enter_episode_number">Enter episode number</string>
+    <string name="episode_e">E</string>
+    <string name="season_s">S</string>
 
 
 </resources>

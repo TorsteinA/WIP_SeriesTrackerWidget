@@ -15,6 +15,9 @@ interface SeriesListEntityDatabaseDao {
     @Delete
     fun delete(entity: SeriesListEntity)
 
+    @Query("DELETE FROM series_entity_table")
+    fun deleteAll()
+
     @Query("SELECT * from series_entity_table WHERE entityId = :key")
     fun get(key: Long): SeriesListEntity?
 
@@ -32,5 +35,6 @@ interface SeriesListEntityDatabaseDao {
      */
     @Query("SELECT * from series_entity_table WHERE entityId = :key")
     fun getListEntityWithId(key: Long): LiveData<SeriesListEntity>
+
 
 }
