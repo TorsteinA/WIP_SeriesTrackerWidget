@@ -37,30 +37,55 @@ class AddSeriesListEntityFragment : Fragment() {
 
         binding.seriesListEntityViewModel = seriesListEntityViewModel
         binding.lifecycleOwner = this
-
         viewModel = seriesListEntityViewModel
 
-        // Observer for Navigation back to Main List
-        seriesListEntityViewModel.navigateToMainList.observe(this, Observer {
+        observeNavigationBackToMainList()
+
+        return binding.root
+    }
+
+
+    // EditText's not available in OnCreateView, but are accessible in OnViewCreated.
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        observeTitle()
+        observeExtras()
+        observeSeason()
+        observeEpisode()
+    }
+
+    private fun observeNavigationBackToMainList() {
+        viewModel.navigateToMainList.observe(this, Observer {
             if (it == true) {
                 this.findNavController().navigate(
                     AddSeriesListEntityFragmentDirections.actionAddSeriesListEntityFragmentToMainFragment()
                 )
-                seriesListEntityViewModel.doneNavigatingToMainList()
+                viewModel.doneNavigatingToMainList()
 
                 // Hide keyboard in case input field is active
                 hideKeyboard()
             }
         })
-
-
-        return binding.root
     }
 
-    // EditText's not available in OnCreateView, but are accessible in OnViewCreated.
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    private fun observeTitle() {
+        addSeriesEnterTitle.addTextChangedListener(object : TextWatcher
+        {
+            override fun afterTextChanged(p0: Editable?) { viewModel.setTitle(p0.toString()) }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+    }
 
-        // Observer for listening to season
+    private fun observeExtras() {
+        editSeriesEnterExtras.addTextChangedListener(object : TextWatcher
+        {
+            override fun afterTextChanged(p0: Editable?) { viewModel.setExtras(p0.toString()) }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+    }
+
+    private fun observeSeason() {
         editSeriesEnterSeason.addTextChangedListener(object : TextWatcher
         {
             override fun afterTextChanged(p0: Editable?)
@@ -73,8 +98,9 @@ class AddSeriesListEntityFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
+    }
 
-        // Observer for listening to episode
+    private fun observeEpisode() {
         editSeriesEnterEpisode.addTextChangedListener(object : TextWatcher
         {
             override fun afterTextChanged(p0: Editable?)

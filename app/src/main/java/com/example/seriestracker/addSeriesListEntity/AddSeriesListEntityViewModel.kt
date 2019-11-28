@@ -31,11 +31,9 @@ class AddSeriesListEntityViewModel(
         episode.value = 0
     }
 
-    fun getTitle() = title
-    fun getExtras() = extras
-    fun getSeason() = season
+    fun setTitle(t: String) {title.value = t}
+    fun setExtras(x: String) {extras.value = x}
     fun setSeason(s: Int) { season.value = s}
-    fun getEpisode() = episode
     fun setEpisode(e: Int) { episode.value = e}
 
     private var _navigateToMainList = MutableLiveData<Boolean>()

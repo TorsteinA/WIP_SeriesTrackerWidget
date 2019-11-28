@@ -28,7 +28,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <EditText
             android:id="@+id/addSeriesEnterTitle"
             android:layout_width="0dp"
@@ -40,13 +39,12 @@
             android:hint="@string/card_edit_title"
             android:inputType="textPersonName"
             android:labelFor="@id/addSeriesFragmentTitle"
-            android:text="@={seriesListEntityViewModel.title}"
+            android:text=""
             app:layout_constraintBottom_toTopOf="@+id/editSeriesEnterExtras"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addSeriesFragmentTitle" />
-
 
         <EditText
             android:id="@+id/editSeriesEnterExtras"
@@ -59,7 +57,7 @@
             android:hint="@string/card_edit_extras"
             android:inputType="textPersonName"
             android:labelFor="@id/editSeriesEnterExtras"
-            android:text="@={seriesListEntityViewModel.extras}"
+            android:text=""
             app:layout_constraintBottom_toTopOf="@+id/editSeriesListingTypeHolder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -119,7 +117,6 @@
             app:layout_constraintTop_toTopOf="@+id/editSeriesEnterSeason" />
 
 
-<!--        android:text="@={`` + seriesListEntityViewModel.season}"       -->
         <EditText
             android:id="@+id/editSeriesEnterSeason"
             android:layout_width="wrap_content"
@@ -129,7 +126,7 @@
             android:ems="10"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:hint="Enter season number"
+            android:hint="@string/enter_season_number"
             android:text=""
             app:layout_constraintBottom_toTopOf="@+id/editSeriesEnterEpisode"
             app:layout_constraintEnd_toEndOf="parent"
@@ -150,7 +147,6 @@
             app:layout_constraintTop_toTopOf="@+id/editSeriesEnterEpisode" />
 
 
-<!--        android:text="@={`` + seriesListEntityViewModel.episode}"       -->
         <EditText
             android:id="@+id/editSeriesEnterEpisode"
             android:layout_width="wrap_content"
@@ -160,7 +156,7 @@
             android:ems="10"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:hint="Enter episode number"
+            android:hint="@string/enter_episode_number"
             android:text=""
             app:layout_constraintBottom_toTopOf="@+id/seriesEntityFinishedChipGroup"
             app:layout_constraintEnd_toEndOf="parent"
