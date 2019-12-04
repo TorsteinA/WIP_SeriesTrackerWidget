@@ -17,8 +17,6 @@ import com.example.seriestracker.adapters.SeriesListEntityAdapter
 import com.example.seriestracker.adapters.SeriesListEntityListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.header.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class MainListFragment : Fragment() {
 
@@ -53,35 +51,9 @@ class MainListFragment : Fragment() {
         viewModel = mainListViewModel
 
         // Observers
-        mainListViewModel.entities.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.addHeaderAndSubmitList(it)
-            }
-        })
-
-        mainListViewModel.showSnackbarEvent.observe(this, Observer {
-            if (it != -1L) {
-                Snackbar.make(
-                    activity!!.findViewById(android.R.id.content),
-                    "Clicked Entity with id: $it",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                mainListViewModel.doneShowingSnackbar()
-            }
-        })
-
-        mainListViewModel.navigateToAddNewEntity.observe(this, Observer {
-            if (it == true)
-            {
-                this.findNavController().navigate(
-                    MainListFragmentDirections.actionMainFragmentToAddSeriesListEntityFragment()
-                )
-
-                // Make sure to only navigate once, even if the device has a configuration change
-                mainListViewModel.doneNavigatingToAddNewEntity()
-            }
-        })
-
+        observeMainListEntities(adapter)
+        observeShowSnackbarEvent()
+        observeNavigateToAddNewEntity()
         return binding.root
     }
 
@@ -98,5 +70,43 @@ class MainListFragment : Fragment() {
 //                viewModel.doneNavigatingToAddNewEntity()
 //            }
 //        }
+    }
+
+    private fun observeMainListEntities(adapter: SeriesListEntityAdapter) {
+        viewModel.entities.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.addHeaderAndSubmitList(it)
+            }
+        })
+
+
+    }
+
+    private fun observeNavigateToAddNewEntity(){
+        viewModel.navigateToAddNewEntity.observe(this, Observer {
+            if (it == true)
+            {
+                this.findNavController().navigate(
+                    MainListFragmentDirections.actionMainFragmentToAddSeriesListEntityFragment()
+                )
+
+                // Make sure to only navigate once, even if the device has a configuration change
+                viewModel.doneNavigatingToAddNewEntity()
+            }
+        })
+    }
+
+    private fun observeShowSnackbarEvent(){
+        viewModel.showSnackbarEvent.observe(this, Observer {
+//            if (it != -1L) {
+            if (it != "") {
+                Snackbar.make(
+                    activity!!.findViewById(android.R.id.content),
+                    "$it",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                viewModel.doneShowingSnackbar()
+            }
+        })
     }
 }

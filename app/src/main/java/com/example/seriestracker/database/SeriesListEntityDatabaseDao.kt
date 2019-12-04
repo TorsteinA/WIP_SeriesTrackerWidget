@@ -23,7 +23,6 @@ interface SeriesListEntityDatabaseDao {
 
     /**
      * Selects and returns all rows in the table,
-     *
      * sorted by start time in descending order.
      */
     @Query("SELECT * FROM series_entity_table ORDER BY entityId DESC")
@@ -31,10 +30,11 @@ interface SeriesListEntityDatabaseDao {
 
 
     /**
-     * Selects and returns the night with given nightId.
+     * Selects and returns the entity with given entityId.
      */
     @Query("SELECT * from series_entity_table WHERE entityId = :key")
     fun getListEntityWithId(key: Long): LiveData<SeriesListEntity>
+
 
 
 }

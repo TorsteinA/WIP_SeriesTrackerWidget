@@ -16,14 +16,12 @@ class MainListViewModel(
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private var currentEntity = MutableLiveData<SeriesListEntity?>()
     val entities = database.getAllListEntities()
 
-    // Snackbar
-    private var _showSnackbarEvent = MutableLiveData<Long>()
-    val showSnackbarEvent: LiveData<Long>
-            get() = _showSnackbarEvent
-    fun doneShowingSnackbar() { _showSnackbarEvent.value = -1L }
+    private var _showSnackbarEvent = MutableLiveData<String>()
+    val showSnackbarEvent: LiveData<String>
+        get() = _showSnackbarEvent
+    fun doneShowingSnackbar() { _showSnackbarEvent.value = "" }
 
     // Navigation
     private var _navigateToAddNewEntity = MutableLiveData<Boolean>()
@@ -48,14 +46,19 @@ class MainListViewModel(
     /**
      * Execute when the Add Card button is pressed (Later when the Header is clicked)
      * */
-    fun onAddNewEntity() {
-        _navigateToAddNewEntity.value = true
-    }
+    fun onAddNewEntity() { _navigateToAddNewEntity.value = true }
 
-    fun onClickedEntity(entityId: Long) {
-        _showSnackbarEvent.value = entityId
-        // TODO Replace with navigation to edit-fragment with entityId as value rather than true when pressing textarea
+    fun onClickedEntity(entityId: Long) { _showSnackbarEvent.value = "Clicked Entity with id: $entityId" }
 
-    }
+    /*fun onIncrementEpisode(entityId: Long) {
+        uiScope.launch {
+            withContext(Dispatchers.IO){
+                val entity = database.getListEntityWithId(entityId)
+                val episode = entity.value?.episode
+                if (episode != null) entity.value?.episode = episode
+                if (entity.value != null) database.update(entity.value!!)
+            }
+        }
+    }*/
 
 }

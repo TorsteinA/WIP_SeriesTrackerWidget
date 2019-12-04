@@ -18,7 +18,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.ClassCastException
 
-class SeriesListEntityAdapter(val clickListener: SeriesListEntityListener) : ListAdapter<DataItem, RecyclerView.ViewHolder>(SeriesListEntityDiffCallback()) {
+class SeriesListEntityAdapter(
+    val clickListener: SeriesListEntityListener
+) : ListAdapter<DataItem, RecyclerView.ViewHolder>(SeriesListEntityDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
@@ -50,11 +52,13 @@ class SeriesListEntityAdapter(val clickListener: SeriesListEntityListener) : Lis
 
     fun addHeaderAndSubmitList(list: List<SeriesListEntity>?) {
         adapterScope.launch {
-            val items = when (list) {
+            val items = when (list)
+            {
                 null -> listOf(DataItem.Header)
                 else -> listOf(DataItem.Header) + list.map { DataItem.SeriesListEntityItemSPlusE(it) }          // TODO Add support for E_only items
             }
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main)
+            {
                 submitList(items)
             }
         }
@@ -97,6 +101,13 @@ class SeriesListEntityListener(val clickListener: (entityId: Long) -> Unit) {
     fun onClickedEpisode(entity: SeriesListEntity) = clickListener(entity.entityId)
 
     fun onClickedCheckmark(entity: SeriesListEntity) = clickListener(entity.entityId)
+}
+
+class SeriesListHeaderListener {
+
+    fun onClick() { //TODO Add params and functionality
+
+    }
 }
 
 sealed class DataItem {
