@@ -19,7 +19,9 @@ import kotlinx.coroutines.withContext
 import java.lang.ClassCastException
 
 class SeriesListEntityAdapter(
-    val clickListener: SeriesListEntityListener
+    val sleListener: SeriesListEntityListener,
+    val sletaListener: SeriesListEntityTextAreaListener,
+    val slesListener: SeriesListEntitySeasonListener
 ) : ListAdapter<DataItem, RecyclerView.ViewHolder>(SeriesListEntityDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -37,7 +39,7 @@ class SeriesListEntityAdapter(
         when (holder) {
             is ViewHolder -> {
                 val listItem = getItem(position) as DataItem.SeriesListEntityItemSPlusE
-                holder.bind(listItem.seriesListEntity, clickListener)
+                holder.bind(listItem.seriesListEntity, sleListener, sletaListener, slesListener)
             }
         }
     }
@@ -66,9 +68,16 @@ class SeriesListEntityAdapter(
 
     class ViewHolder private constructor(val binding: ListItemSeriesBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: SeriesListEntity, clickListener: SeriesListEntityListener) {
+        fun bind(
+            item: SeriesListEntity,
+            sleListener: SeriesListEntityListener,
+            sletaListener: SeriesListEntityTextAreaListener,
+            slesListener: SeriesListEntitySeasonListener
+        ) {
             binding.entity = item
-            binding.clickListener = clickListener
+            binding.sleListener = sleListener
+            binding.sletaListener = sletaListener
+            binding.slesListener = slesListener
             binding.executePendingBindings()
         }
 
@@ -93,24 +102,27 @@ class SeriesListEntityDiffCallback : DiffUtil.ItemCallback<DataItem>() {
     }
 }
 
+
+
+
+
 class SeriesListEntityListener(val clickListener: (entityId: Long) -> Unit) {
+    fun onClickedEntity(entity: SeriesListEntity) = clickListener(entity.entityId)
+}
+
+class SeriesListEntityTextAreaListener(val clickListener: (entityId: Long) -> Unit) {
     fun onClickedText(entity: SeriesListEntity) = clickListener(entity.entityId)
+}
 
+class SeriesListEntitySeasonListener(val clickListener: (entityId: Long) -> Unit) {
     fun onClickedSeason(entity: SeriesListEntity) = clickListener(entity.entityId)
-
-    fun onClickedEpisode(entity: SeriesListEntity) = clickListener(entity.entityId)
-
-    fun onClickedCheckmark(entity: SeriesListEntity) = clickListener(entity.entityId)
 }
 
-class SeriesListHeaderListener {
 
-    fun onClick() { //TODO Add params and functionality
 
-    }
-}
 
-sealed class DataItem {
+sealed class DataItem
+{
 
     abstract val id: Long
 
@@ -127,7 +139,8 @@ sealed class DataItem {
     }
 }
 
-class TextViewHolder(view: View): RecyclerView.ViewHolder(view){
+class TextViewHolder(view: View): RecyclerView.ViewHolder(view)
+{
     companion object {
         fun from(parent: ViewGroup): TextViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)

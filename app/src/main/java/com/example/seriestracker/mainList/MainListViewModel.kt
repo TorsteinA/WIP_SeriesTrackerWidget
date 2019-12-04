@@ -50,6 +50,15 @@ class MainListViewModel(
 
     fun onClickedEntity(entityId: Long) { _showSnackbarEvent.value = "Clicked Entity with id: $entityId" }
 
+    fun onClickedText(entityId: Long) { _showSnackbarEvent.value = "Clicked Text Area of id: $entityId" }
+
+    fun onClickedEpisode(entityId: Long) { _showSnackbarEvent.value = "Clicked Episode of id: $entityId" }
+
+    fun onClickedSeason(entityId: Long) { _showSnackbarEvent.value = "Clicked Season of id: $entityId" }
+
+    fun onClickedCheckmark(entityId: Long) { _showSnackbarEvent.value = "Clicked Checkmark of id: $entityId" }
+
+
     /*fun onIncrementEpisode(entityId: Long) {
         uiScope.launch {
             withContext(Dispatchers.IO){

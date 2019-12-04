@@ -15,8 +15,11 @@ import com.example.seriestracker.database.SeriesListEntityDatabase
 import com.example.seriestracker.databinding.FragmentMainListBinding
 import com.example.seriestracker.adapters.SeriesListEntityAdapter
 import com.example.seriestracker.adapters.SeriesListEntityListener
+import com.example.seriestracker.adapters.SeriesListEntitySeasonListener
+import com.example.seriestracker.adapters.SeriesListEntityTextAreaListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.header.*
+import kotlinx.android.synthetic.main.list_item_series.*
 
 class MainListFragment : Fragment() {
 
@@ -42,10 +45,23 @@ class MainListFragment : Fragment() {
         binding.entityList.layoutManager = manager
 
 
-        val adapter = SeriesListEntityAdapter ( SeriesListEntityListener
-            { entityId ->
-                    mainListViewModel.onClickedEntity ( entityId )
-            } )
+        val adapter = SeriesListEntityAdapter (
+
+            SeriesListEntityListener
+            {
+                    entityId -> mainListViewModel.onClickedEntity ( entityId )
+            },
+
+            SeriesListEntityTextAreaListener
+            {
+                    entityId -> mainListViewModel.onClickedText( entityId )
+            },
+
+            SeriesListEntitySeasonListener
+            {
+                    entityId -> mainListViewModel.onClickedSeason( entityId )
+            }
+        )
         binding.entityList.adapter = adapter
 
         viewModel = mainListViewModel
@@ -57,29 +73,12 @@ class MainListFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        list_header.setOnClickListener {
-//            run {
-//                this.findNavController().navigate(
-//                    MainListFragmentDirections.actionMainFragmentToAddSeriesListEntityFragment()
-//                )
-//
-//                // Make sure to only navigate once, even if the device has a configuration change
-//                viewModel.doneNavigatingToAddNewEntity()
-//            }
-//        }
-    }
-
     private fun observeMainListEntities(adapter: SeriesListEntityAdapter) {
         viewModel.entities.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.addHeaderAndSubmitList(it)
             }
         })
-
-
     }
 
     private fun observeNavigateToAddNewEntity(){

@@ -8,8 +8,14 @@
             name="entity"
             type="com.example.seriestracker.database.SeriesListEntity" />
         <variable
-            name="clickListener"
+            name="sleListener"
             type="com.example.seriestracker.adapters.SeriesListEntityListener" />
+        <variable
+            name="sletaListener"
+            type="com.example.seriestracker.adapters.SeriesListEntityTextAreaListener" />
+        <variable
+            name="slesListener"
+            type="com.example.seriestracker.adapters.SeriesListEntitySeasonListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +27,7 @@
             android:layout_width="@dimen/checkmark_width"
             android:layout_height="@dimen/checkmark_height"
             android:contentDescription="@string/checkmark_description_string"
-            android:onClick="@{() -> clickListener.onClickedCheckmark(entity)}"
+            android:onClick="@{() -> sleListener.onClickedEntity(entity)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:onClick="@{() -> clickListener.onClickedText(entity)}"
+            android:onClick="@{() -> sletaListener.onClickedText(entity)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/constraint_season"
             app:layout_constraintStart_toEndOf="@+id/checkmark"
@@ -67,7 +73,7 @@
             android:id="@+id/constraint_season"
             android:layout_width="75dp"
             android:layout_height="0dp"
-            android:onClick="@{() -> clickListener.onClickedSeason(entity)}"
+            android:onClick="@{() -> slesListener.onClickedSeason(entity)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/constraint_episode"
             app:layout_constraintHorizontal_bias="0"
@@ -119,7 +125,7 @@
             android:id="@+id/constraint_episode"
             android:layout_width="75dp"
             android:layout_height="0dp"
-            android:onClick="@{() -> clickListener.onClickedEpisode(entity)}"
+            android:onClick="@{() -> sleListener.onClickedEntity(entity)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"

@@ -3,8 +3,11 @@
 
     <data>
         <variable
+            name="entity"
+            type="com.example.seriestracker.adapters.DataItem.Header" />
+        <!--<variable
             name="clickListener"
-            type="com.example.seriestracker.adapters.SeriesListHeaderListener" />
+            type="com.example.seriestracker.adapters.SeriesListHeaderListener" />-->
     </data>
 
     <TextView
@@ -14,4 +17,5 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/section_watching"
         android:padding="8dp" />
+<!--    android:onClick="@{() -> clickListener.onClickedHeader(entity.id)}"-->
 </layout>
