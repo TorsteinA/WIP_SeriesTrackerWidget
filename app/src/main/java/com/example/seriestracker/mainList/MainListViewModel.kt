@@ -30,6 +30,11 @@ class MainListViewModel(
         get() = _navigateToAddNewEntity
     fun doneNavigatingToAddNewEntity() { _navigateToAddNewEntity.value = false }
 
+    private var _navigateToEditEntity = MutableLiveData<Boolean>()
+    val navigateToEditEntity: LiveData<Boolean>
+        get() = _navigateToEditEntity
+    fun doneNavigatingToEditEntity() { _navigateToEditEntity.value = false }
+
     /**
      * Execute when the Add Card button is pressed (Later when the Header is clicked)
      * */
@@ -41,7 +46,7 @@ class MainListViewModel(
 
     fun onClickedSeason(entityId: Long) { onIncrementSeason(entityId) }
 
-    fun onClickedCheckmark(entityId: Long) { _showSnackbarEvent.value = "Clicked Checkmark of id: $entityId" }  // TODO Add onClickedCheckmark
+    fun onClickedCheckmark(entityId: Long) { onFinish(entityId) } //_showSnackbarEvent.value = "Clicked Checkmark of id: $entityId" }  // TODO Add onClickedCheckmark
 
     private fun onIncrementEpisode(entityId: Long) {
         uiScope.launch {
@@ -69,5 +74,20 @@ class MainListViewModel(
                 if (entity != null) database.update(entity)
             }
         }
+    }
+
+    private fun onFinish(entityId: Long) {
+        uiScope.launch {
+            withContext(Dispatchers.IO){
+                val entity =  database.get(entityId)
+                val finished = entity?.finished
+                if (finished != null) entity.finished = !finished
+                if (entity != null) database.update(entity)
+            }
+        }
+
+        // TODO if finished is true, change checkmark to small square icon, and if it's false, change to checkmark icon
+
+
     }
 }
