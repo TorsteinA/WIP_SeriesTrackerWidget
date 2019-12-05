@@ -18,6 +18,7 @@ class MainListViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     val entities = database.getAllListEntities()
 
+    // Snackbar
     private var _showSnackbarEvent = MutableLiveData<String>()
     val showSnackbarEvent: LiveData<String>
         get() = _showSnackbarEvent
@@ -29,20 +30,6 @@ class MainListViewModel(
         get() = _navigateToAddNewEntity
     fun doneNavigatingToAddNewEntity() { _navigateToAddNewEntity.value = false }
 
-
-    // Database functions
-    private suspend fun update(entity: SeriesListEntity) {
-        withContext(Dispatchers.IO) {
-            database.update(entity)
-        }
-    }
-
-    private suspend fun get(entity: SeriesListEntity) {
-        withContext(Dispatchers.IO) {
-            database.get(entity.entityId)
-        }
-    }
-
     /**
      * Execute when the Add Card button is pressed (Later when the Header is clicked)
      * */
@@ -50,22 +37,21 @@ class MainListViewModel(
 
     fun onClickedText(entityId: Long) { _showSnackbarEvent.value = "Clicked Text Area of id: $entityId" }
 
-    fun onClickedEpisode(entityId: Long) { _showSnackbarEvent.value = "Clicked Episode of id: $entityId" }
+    fun onClickedEpisode(entityId: Long) { onIncrementEpisode(entityId) }
 
     fun onClickedSeason(entityId: Long) { _showSnackbarEvent.value = "Clicked Season of id: $entityId" }
 
     fun onClickedCheckmark(entityId: Long) { _showSnackbarEvent.value = "Clicked Checkmark of id: $entityId" }
 
-
-    /*fun onIncrementEpisode(entityId: Long) {
+    fun onIncrementEpisode(entityId: Long) {
         uiScope.launch {
             withContext(Dispatchers.IO){
-                val entity = database.getListEntityWithId(entityId)
-                val episode = entity.value?.episode
-                if (episode != null) entity.value?.episode = episode
-                if (entity.value != null) database.update(entity.value!!)
+                val entity = database.get(entityId)
+                val episode = entity?.episode
+                if (episode != null) { entity.episode = episode +1 }
+                if (entity != null) { database.update(entity) }
             }
         }
-    }*/
+    }
 
 }

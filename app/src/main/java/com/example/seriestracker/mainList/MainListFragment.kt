@@ -88,7 +88,6 @@ class MainListFragment : Fragment() {
 
     private fun observeShowSnackbarEvent(){
         viewModel.showSnackbarEvent.observe(this, Observer {
-//            if (it != -1L) {
             if (it != "") {
                 Snackbar.make(
                     activity!!.findViewById(android.R.id.content),
