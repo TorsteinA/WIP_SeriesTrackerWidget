@@ -48,8 +48,6 @@ class MainListViewModel(
      * */
     fun onAddNewEntity() { _navigateToAddNewEntity.value = true }
 
-    fun onClickedEntity(entityId: Long) { _showSnackbarEvent.value = "Clicked Entity with id: $entityId" }
-
     fun onClickedText(entityId: Long) { _showSnackbarEvent.value = "Clicked Text Area of id: $entityId" }
 
     fun onClickedEpisode(entityId: Long) { _showSnackbarEvent.value = "Clicked Episode of id: $entityId" }

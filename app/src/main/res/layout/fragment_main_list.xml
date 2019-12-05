@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/actionModeBackground">
+        android:background="@android:color/black">
 
         <Button
             android:id="@+id/add_new_card_button"
@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:onClick="@{() -> mainListViewModel.onAddNewEntity()}"
             android:text="@string/add_new_series_button_text"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"

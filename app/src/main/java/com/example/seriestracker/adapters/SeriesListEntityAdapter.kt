@@ -19,9 +19,10 @@ import kotlinx.coroutines.withContext
 import java.lang.ClassCastException
 
 class SeriesListEntityAdapter(
-    val sleListener: SeriesListEntityListener,
+    val slecListener: SeriesListEntityCheckmarkListener,
     val sletaListener: SeriesListEntityTextAreaListener,
-    val slesListener: SeriesListEntitySeasonListener
+    val slesListener: SeriesListEntitySeasonListener,
+    val sleeListener: SeriesListEntityEpisodeListener
 ) : ListAdapter<DataItem, RecyclerView.ViewHolder>(SeriesListEntityDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -39,7 +40,7 @@ class SeriesListEntityAdapter(
         when (holder) {
             is ViewHolder -> {
                 val listItem = getItem(position) as DataItem.SeriesListEntityItemSPlusE
-                holder.bind(listItem.seriesListEntity, sleListener, sletaListener, slesListener)
+                holder.bind(listItem.seriesListEntity, slecListener, sletaListener, slesListener, sleeListener)
             }
         }
     }
@@ -70,14 +71,16 @@ class SeriesListEntityAdapter(
 
         fun bind(
             item: SeriesListEntity,
-            sleListener: SeriesListEntityListener,
+            slecListener: SeriesListEntityCheckmarkListener,
             sletaListener: SeriesListEntityTextAreaListener,
-            slesListener: SeriesListEntitySeasonListener
+            slesListener: SeriesListEntitySeasonListener,
+            sleeListener: SeriesListEntityEpisodeListener
         ) {
             binding.entity = item
-            binding.sleListener = sleListener
+            binding.slecListener = slecListener
             binding.sletaListener = sletaListener
             binding.slesListener = slesListener
+            binding.sleeListener = sleeListener
             binding.executePendingBindings()
         }
 
@@ -106,8 +109,8 @@ class SeriesListEntityDiffCallback : DiffUtil.ItemCallback<DataItem>() {
 
 
 
-class SeriesListEntityListener(val clickListener: (entityId: Long) -> Unit) {
-    fun onClickedEntity(entity: SeriesListEntity) = clickListener(entity.entityId)
+class SeriesListEntityCheckmarkListener(val clickListener: (entityId: Long) -> Unit) {
+    fun onClickedCheckmark(entity: SeriesListEntity) = clickListener(entity.entityId)
 }
 
 class SeriesListEntityTextAreaListener(val clickListener: (entityId: Long) -> Unit) {
@@ -116,6 +119,10 @@ class SeriesListEntityTextAreaListener(val clickListener: (entityId: Long) -> Un
 
 class SeriesListEntitySeasonListener(val clickListener: (entityId: Long) -> Unit) {
     fun onClickedSeason(entity: SeriesListEntity) = clickListener(entity.entityId)
+}
+
+class SeriesListEntityEpisodeListener(val clickListener: (entityId: Long) -> Unit) {
+    fun onClickedEpisode(entity: SeriesListEntity) = clickListener(entity.entityId)
 }
 
 

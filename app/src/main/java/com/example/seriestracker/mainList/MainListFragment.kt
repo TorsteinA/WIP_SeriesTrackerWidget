@@ -11,15 +11,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.seriestracker.R
+import com.example.seriestracker.adapters.*
 import com.example.seriestracker.database.SeriesListEntityDatabase
 import com.example.seriestracker.databinding.FragmentMainListBinding
-import com.example.seriestracker.adapters.SeriesListEntityAdapter
-import com.example.seriestracker.adapters.SeriesListEntityListener
-import com.example.seriestracker.adapters.SeriesListEntitySeasonListener
-import com.example.seriestracker.adapters.SeriesListEntityTextAreaListener
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.header.*
-import kotlinx.android.synthetic.main.list_item_series.*
 
 class MainListFragment : Fragment() {
 
@@ -46,21 +41,17 @@ class MainListFragment : Fragment() {
 
 
         val adapter = SeriesListEntityAdapter (
-
-            SeriesListEntityListener
-            {
-                    entityId -> mainListViewModel.onClickedEntity ( entityId )
-            },
+            SeriesListEntityCheckmarkListener
+            { entityId -> mainListViewModel.onClickedCheckmark( entityId ) },
 
             SeriesListEntityTextAreaListener
-            {
-                    entityId -> mainListViewModel.onClickedText( entityId )
-            },
+            { entityId -> mainListViewModel.onClickedText( entityId ) },
 
             SeriesListEntitySeasonListener
-            {
-                    entityId -> mainListViewModel.onClickedSeason( entityId )
-            }
+            { entityId -> mainListViewModel.onClickedSeason( entityId ) },
+
+            SeriesListEntityEpisodeListener
+            { entityId -> mainListViewModel.onClickedEpisode( entityId ) }
         )
         binding.entityList.adapter = adapter
 

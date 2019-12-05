@@ -8,27 +8,35 @@
             name="entity"
             type="com.example.seriestracker.database.SeriesListEntity" />
         <variable
-            name="sleListener"
-            type="com.example.seriestracker.adapters.SeriesListEntityListener" />
+            name="slecListener"
+            type="com.example.seriestracker.adapters.SeriesListEntityCheckmarkListener" />
         <variable
             name="sletaListener"
             type="com.example.seriestracker.adapters.SeriesListEntityTextAreaListener" />
         <variable
             name="slesListener"
             type="com.example.seriestracker.adapters.SeriesListEntitySeasonListener" />
+        <variable
+            name="sleeListener"
+            type="com.example.seriestracker.adapters.SeriesListEntityEpisodeListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/checkmark"
             android:layout_width="@dimen/checkmark_width"
             android:layout_height="@dimen/checkmark_height"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:contentDescription="@string/checkmark_description_string"
-            android:onClick="@{() -> sleListener.onClickedEntity(entity)}"
+            android:onClick="@{() -> slecListener.onClickedCheckmark(entity)}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_holder_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/list_item_finish_icon_png"
@@ -37,58 +45,67 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/text_holder_layout"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:onClick="@{() -> sletaListener.onClickedText(entity)}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/checkmark"
             app:layout_constraintEnd_toStartOf="@+id/constraint_season"
             app:layout_constraintStart_toEndOf="@+id/checkmark"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="@+id/checkmark">
 
             <TextView
                 android:id="@+id/text_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="@{entity.title}"
+                android:textColor="?attr/editTextColor"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/text_extras"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Title of the Show" />
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="Title of the Show Title of the Show Title of the Show Title of the Show Title of the Show Title of the Show " />
 
             <TextView
                 android:id="@+id/text_extras"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{entity.extras}"
+                android:textColor="?attr/editTextColor"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_title"
-                tools:text="Extras about show" />
+                tools:text="Extras about show Extras about show Extras about show Extras about show Extras about show Extras about show Extras about show " />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_season"
-            android:layout_width="75dp"
+            android:layout_width="82dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
             android:onClick="@{() -> slesListener.onClickedSeason(entity)}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/checkmark"
             app:layout_constraintEnd_toStartOf="@+id/constraint_episode"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@+id/text_holder_layout"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="@+id/checkmark">
 
             <TextView
-                android:id="@+id/text_Season_S"
+                android:id="@+id/text_season_s"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:text="@string/season_s"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/editTextColor"
                 android:textSize="40sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/text_season_number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,50 +114,58 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{`` + entity.season}"
+                android:textAlignment="viewStart"
+                android:textColor="?attr/editTextColor"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/divider_season"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/text_Season_S"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="88" />
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="888" />
 
             <ImageView
                 android:id="@+id/divider_season"
                 android:layout_width="0dp"
-                android:layout_height="5dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="1dp"
                 android:background="#AFAFAF"
                 android:contentDescription="@string/divider_season_description_string"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/text_season_number"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_season_number"
-                app:layout_constraintTop_toBottomOf="@+id/text_season_number"
-                app:layout_constraintVertical_bias="0.844"
-                app:srcCompat="@android:drawable/divider_horizontal_textfield" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_season_s"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@android:color/white" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_episode"
-            android:layout_width="75dp"
+            android:layout_width="82dp"
             android:layout_height="0dp"
-            android:onClick="@{() -> sleListener.onClickedEntity(entity)}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{() -> sleeListener.onClickedEpisode(entity)}"
+            app:layout_constraintBottom_toBottomOf="@+id/checkmark"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@+id/constraint_season"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="@+id/checkmark">
 
             <TextView
                 android:id="@+id/text_episode_e"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:text="@string/episode_e"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/editTextColor"
                 android:textSize="40sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/divider_episode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -150,28 +175,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{`` + entity.episode}"
+                android:textAlignment="viewStart"
+                android:textColor="?attr/editTextColor"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/divider_episode"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.47"
-                app:layout_constraintStart_toEndOf="@+id/text_episode_e"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="88" />
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="888" />
 
             <ImageView
                 android:id="@+id/divider_episode"
                 android:layout_width="0dp"
-                android:layout_height="5dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginBottom="1dp"
                 android:background="#AFAFAF"
                 android:contentDescription="@string/divider_season_description_string"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/text_episode_number"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_episode_number"
-                app:layout_constraintTop_toBottomOf="@+id/text_episode_number"
-                app:layout_constraintVertical_bias="0.844"
-                app:srcCompat="@android:drawable/divider_horizontal_textfield" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_episode_e"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@android:color/white" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
