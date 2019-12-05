@@ -35,23 +35,39 @@ class MainListViewModel(
      * */
     fun onAddNewEntity() { _navigateToAddNewEntity.value = true }
 
-    fun onClickedText(entityId: Long) { _showSnackbarEvent.value = "Clicked Text Area of id: $entityId" }
+    fun onClickedText(entityId: Long) { _showSnackbarEvent.value = "Clicked Text Area of id: $entityId" }  // TODO Add navigateToEditEntity
 
     fun onClickedEpisode(entityId: Long) { onIncrementEpisode(entityId) }
 
-    fun onClickedSeason(entityId: Long) { _showSnackbarEvent.value = "Clicked Season of id: $entityId" }
+    fun onClickedSeason(entityId: Long) { onIncrementSeason(entityId) }
 
-    fun onClickedCheckmark(entityId: Long) { _showSnackbarEvent.value = "Clicked Checkmark of id: $entityId" }
+    fun onClickedCheckmark(entityId: Long) { _showSnackbarEvent.value = "Clicked Checkmark of id: $entityId" }  // TODO Add onClickedCheckmark
 
-    fun onIncrementEpisode(entityId: Long) {
+    private fun onIncrementEpisode(entityId: Long) {
         uiScope.launch {
             withContext(Dispatchers.IO){
                 val entity = database.get(entityId)
                 val episode = entity?.episode
-                if (episode != null) { entity.episode = episode +1 }
-                if (entity != null) { database.update(entity) }
+                if (episode != null) entity.episode = episode +1
+                if (entity != null) database.update(entity)
             }
         }
     }
 
+    private fun onIncrementSeason(entityId: Long) {
+        uiScope.launch {
+            withContext(Dispatchers.IO){
+                val entity = database.get(entityId)
+                val season = entity?.season
+                val episode = entity?.episode
+                if (season != null && episode != null)
+                {
+                    entity.season = season +1
+                    entity.episode = 1
+                }
+
+                if (entity != null) database.update(entity)
+            }
+        }
+    }
 }
