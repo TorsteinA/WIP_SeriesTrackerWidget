@@ -28,10 +28,10 @@ class EditSeriesListEntityViewModel(
         get() = _currentEntity
     fun doneEntiting() { _currentEntity.value = null }
 
-    private var _initialEntity = MutableLiveData<SeriesListEntity?>()
-    val initialEntity: LiveData<SeriesListEntity?>
-        get() = _initialEntity
-    fun doneIniting() { _initialEntity.value = null }
+    private var _initialEntityTitle = MutableLiveData<String>()
+    val initialEntityTitle: LiveData<String>
+        get() = _initialEntityTitle
+    fun doneInitiatingTitle() { _initialEntityTitle.value = null }
 
 
 
@@ -44,8 +44,9 @@ class EditSeriesListEntityViewModel(
             withContext(Dispatchers.IO){
                 val entity = get(entityId)
                 if (entity != null){
-                    _currentEntity.postValue(entity)
-                    Log.i("EditVM", "Entity not null $entity")
+                    //_currentEntity.postValue(entity)
+                    _initialEntityTitle.postValue(entity.title)
+                    Log.i("EditVM", "Entity not null $entity with title ${entity.title}" )
 //                    _title.postValue(entity.title)
 //                    Log.i("EditVM", "Title is ${_title.value} and ${entity.title}")
 //                    _extras.postValue(entity.extras)
