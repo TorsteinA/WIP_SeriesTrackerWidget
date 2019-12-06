@@ -1,8 +1,9 @@
-package com.example.seriestracker.addSeriesListEntity
+package com.example.seriestracker.editSeriesListEntity
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,23 +14,26 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.seriestracker.R
 import com.example.seriestracker.database.SeriesListEntityDatabase
-import com.example.seriestracker.databinding.FragmentAddNewSeriesListEntityBinding
+import com.example.seriestracker.databinding.FragmentEditSeriesListEntityBinding
 import com.example.seriestracker.hideKeyboard
-import kotlinx.android.synthetic.main.fragment_add_new_series_list_entity.*
+import kotlinx.android.synthetic.main.fragment_edit_series_list_entity.*
 
-class AddSeriesListEntityFragment : Fragment() {
-
-    lateinit var viewModel : AddSeriesListEntityViewModel
+class EditSeriesListEntityFragment : Fragment()
+{
+    lateinit var viewModel : EditSeriesListEntityViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View?
     {
-        val binding: FragmentAddNewSeriesListEntityBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_add_new_series_list_entity, container, false)
+        val binding: FragmentEditSeriesListEntityBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_edit_series_list_entity, container, false)
+
         val application = requireNotNull(this.activity).application
+        val arguments = EditSeriesListEntityFragmentArgs.fromBundle(arguments!!)
+
         val dataSource = SeriesListEntityDatabase.getInstance(application).seriesListEntityDatabaseDao
-        val viewModelFactory = AddSeriesListEntityViewModelFactory( dataSource )//, arguments.listEntityId )
+        val viewModelFactory = EditSeriesListEntityViewModelFactory( arguments.entityId, dataSource)
         val seriesListEntityViewModel = ViewModelProviders.of(
-            this, viewModelFactory).get(AddSeriesListEntityViewModel::class.java)
+            this, viewModelFactory).get(EditSeriesListEntityViewModel::class.java)
 
         binding.seriesListEntityViewModel = seriesListEntityViewModel
         binding.lifecycleOwner = this
@@ -46,13 +50,14 @@ class AddSeriesListEntityFragment : Fragment() {
         observeExtras()
         observeSeason()
         observeEpisode()
+        observeEntity()
     }
 
     private fun observeNavigationBackToMainList() {
         viewModel.navigateToMainList.observe(this, Observer {
             if (it == true) {
                 this.findNavController().navigate(
-                    AddSeriesListEntityFragmentDirections.actionAddSeriesListEntityFragmentToMainFragment()
+                    EditSeriesListEntityFragmentDirections.actionEditSeriesListEntityFragmentToMainListFragment()
                 )
                 viewModel.doneNavigatingToMainList()
 
@@ -62,8 +67,18 @@ class AddSeriesListEntityFragment : Fragment() {
         })
     }
 
+    private fun observeEntity() {
+        viewModel.currentEntity.observe(this, Observer { entity ->
+            if (entity != null) {
+                editSeriesEnterTitle.setText(entity.title)
+                Log.i("EditFrag","Entity not null. Tried setting title to ${entity.title}")
+            }
+            viewModel.doneEntiting()
+        })
+    }
+
     private fun observeTitle() {
-        addSeriesEnterTitle.addTextChangedListener(object : TextWatcher
+        editSeriesEnterTitle.addTextChangedListener(object : TextWatcher
         {
             override fun afterTextChanged(p0: Editable?) { viewModel.setTitle(p0.toString()) }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -72,7 +87,7 @@ class AddSeriesListEntityFragment : Fragment() {
     }
 
     private fun observeExtras() {
-        addSeriesEnterExtras.addTextChangedListener(object : TextWatcher
+        editSeriesEnterExtras.addTextChangedListener(object : TextWatcher
         {
             override fun afterTextChanged(p0: Editable?) { viewModel.setExtras(p0.toString()) }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -81,7 +96,7 @@ class AddSeriesListEntityFragment : Fragment() {
     }
 
     private fun observeSeason() {
-        addSeriesEnterSeason.addTextChangedListener(object : TextWatcher
+        editSeriesEnterSeason.addTextChangedListener(object : TextWatcher
         {
             override fun afterTextChanged(p0: Editable?)
             {
@@ -96,7 +111,7 @@ class AddSeriesListEntityFragment : Fragment() {
     }
 
     private fun observeEpisode() {
-        addSeriesEnterEpisode.addTextChangedListener(object : TextWatcher
+        editSeriesEnterEpisode.addTextChangedListener(object : TextWatcher
         {
             override fun afterTextChanged(p0: Editable?)
             {

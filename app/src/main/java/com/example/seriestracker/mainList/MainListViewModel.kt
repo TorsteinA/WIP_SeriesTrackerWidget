@@ -30,23 +30,23 @@ class MainListViewModel(
         get() = _navigateToAddNewEntity
     fun doneNavigatingToAddNewEntity() { _navigateToAddNewEntity.value = false }
 
-    private var _navigateToEditEntity = MutableLiveData<Boolean>()
-    val navigateToEditEntity: LiveData<Boolean>
+    private var _navigateToEditEntity = MutableLiveData<Long>()
+    val navigateToEditEntity: LiveData<Long>
         get() = _navigateToEditEntity
-    fun doneNavigatingToEditEntity() { _navigateToEditEntity.value = false }
+    fun doneNavigatingToEditEntity() { _navigateToEditEntity.value = -1L }
 
     /**
      * Execute when the Add Card button is pressed (Later when the Header is clicked)
      * */
     fun onAddNewEntity() { _navigateToAddNewEntity.value = true }
 
-    fun onClickedText(entityId: Long) { _showSnackbarEvent.value = "Clicked Text Area of id: $entityId" }  // TODO Add navigateToEditEntity
+    fun onClickedText(entityId: Long) { _navigateToEditEntity.value = entityId }
 
     fun onClickedEpisode(entityId: Long) { onIncrementEpisode(entityId) }
 
     fun onClickedSeason(entityId: Long) { onIncrementSeason(entityId) }
 
-    fun onClickedCheckmark(entityId: Long) { onFinish(entityId) } //_showSnackbarEvent.value = "Clicked Checkmark of id: $entityId" }  // TODO Add onClickedCheckmark
+    fun onClickedCheckmark(entityId: Long) { onFinish(entityId) }
 
     private fun onIncrementEpisode(entityId: Long) {
         uiScope.launch {

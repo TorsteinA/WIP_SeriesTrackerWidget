@@ -34,58 +34,56 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:autofillHints=""
             android:ems="10"
             android:hint="@string/card_edit_title"
             android:inputType="textPersonName"
             android:labelFor="@id/addSeriesFragmentTitle"
             android:text=""
-            app:layout_constraintBottom_toTopOf="@+id/editSeriesEnterExtras"
+            app:layout_constraintBottom_toTopOf="@+id/addSeriesEnterExtras"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addSeriesFragmentTitle" />
 
         <EditText
-            android:id="@+id/editSeriesEnterExtras"
+            android:id="@+id/addSeriesEnterExtras"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:autofillHints=""
             android:ems="10"
             android:hint="@string/card_edit_extras"
             android:inputType="textPersonName"
             android:labelFor="@id/editSeriesEnterExtras"
             android:text=""
-            app:layout_constraintBottom_toTopOf="@+id/editSeriesListingTypeHolder"
+            app:layout_constraintBottom_toTopOf="@+id/addSeriesListingTypeHolder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addSeriesEnterTitle" />
 
         <TextView
-            android:id="@+id/editSeriesListingTypeText"
+            android:id="@+id/addSeriesListingTypeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="@string/card_edit_listingType"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editSeriesListingTypeHolder"
-            app:layout_constraintEnd_toStartOf="@+id/editSeriesListingTypeHolder"
+            app:layout_constraintBottom_toBottomOf="@+id/addSeriesListingTypeHolder"
+            app:layout_constraintEnd_toStartOf="@+id/addSeriesListingTypeHolder"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editSeriesListingTypeHolder" />
+            app:layout_constraintTop_toTopOf="@+id/addSeriesListingTypeHolder" />
 
         <RadioGroup
-            android:id="@+id/editSeriesListingTypeHolder"
+            android:id="@+id/addSeriesListingTypeHolder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/editSeriesEnterSeason"
+            app:layout_constraintBottom_toTopOf="@+id/addSeriesEnterSeason"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editSeriesListingTypeText"
-            app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterExtras">
+            app:layout_constraintStart_toEndOf="@+id/addSeriesListingTypeText"
+            app:layout_constraintTop_toBottomOf="@+id/addSeriesEnterExtras">
 
             <RadioButton
                 android:id="@+id/radioButtonSPlusE"
@@ -104,21 +102,21 @@
 
 
         <TextView
-            android:id="@+id/editSeriesSeasonText"
+            android:id="@+id/addSeriesSeasonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="@string/card_edit_season"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editSeriesEnterSeason"
-            app:layout_constraintEnd_toStartOf="@+id/editSeriesEnterSeason"
+            app:layout_constraintBottom_toBottomOf="@+id/addSeriesEnterSeason"
+            app:layout_constraintEnd_toStartOf="@+id/addSeriesEnterSeason"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editSeriesEnterSeason" />
+            app:layout_constraintTop_toTopOf="@+id/addSeriesEnterSeason" />
 
 
         <EditText
-            android:id="@+id/editSeriesEnterSeason"
+            android:id="@+id/addSeriesEnterSeason"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
@@ -128,10 +126,10 @@
             android:inputType="number"
             android:hint="@string/enter_season_number"
             android:text=""
-            app:layout_constraintBottom_toTopOf="@+id/editSeriesEnterEpisode"
+            app:layout_constraintBottom_toTopOf="@+id/addSeriesEnterEpisode"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editSeriesSeasonText"
-            app:layout_constraintTop_toBottomOf="@+id/editSeriesListingTypeHolder" />
+            app:layout_constraintStart_toEndOf="@+id/addSeriesSeasonText"
+            app:layout_constraintTop_toBottomOf="@+id/addSeriesListingTypeHolder" />
 
         <TextView
             android:id="@+id/addSeriesEpisodeText"
@@ -140,15 +138,15 @@
             android:layout_marginStart="32dp"
             android:text="@string/card_edit_episode"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editSeriesEnterEpisode"
-            app:layout_constraintEnd_toStartOf="@+id/editSeriesEnterEpisode"
+            app:layout_constraintBottom_toBottomOf="@+id/addSeriesEnterEpisode"
+            app:layout_constraintEnd_toStartOf="@+id/addSeriesEnterEpisode"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editSeriesEnterEpisode" />
+            app:layout_constraintTop_toTopOf="@+id/addSeriesEnterEpisode" />
 
 
         <EditText
-            android:id="@+id/editSeriesEnterEpisode"
+            android:id="@+id/addSeriesEnterEpisode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="67dp"
@@ -161,10 +159,10 @@
             app:layout_constraintBottom_toTopOf="@+id/seriesEntityFinishedChipGroup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/addSeriesEpisodeText"
-            app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterSeason" />
+            app:layout_constraintTop_toBottomOf="@+id/addSeriesEnterSeason" />
 
         <TextView
-            android:id="@+id/editSeriesFinishedText"
+            android:id="@+id/addSeriesFinishedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -180,11 +178,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/editSeriesAddCardButton"
+            app:layout_constraintBottom_toTopOf="@+id/addSeriesAddCardButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/editSeriesFinishedText"
-            app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterEpisode">
+            app:layout_constraintStart_toEndOf="@+id/addSeriesFinishedText"
+            app:layout_constraintTop_toBottomOf="@+id/addSeriesEnterEpisode">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/seriesEntityFinishedChip"
@@ -194,7 +192,7 @@
         </com.google.android.material.chip.ChipGroup>
 
         <Button
-            android:id="@+id/editSeriesAddCardButton"
+            android:id="@+id/addSeriesAddCardButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -202,22 +200,22 @@
             android:text="@string/card_add_add_card_button"
             android:onClick="@{() -> seriesListEntityViewModel.onClickedButtonAdd()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/editSeriesCancelButton"
+            app:layout_constraintEnd_toStartOf="@id/addSeriesCancelButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seriesEntityFinishedChipGroup" />
 
         <Button
-            android:id="@+id/editSeriesCancelButton"
+            android:id="@+id/addSeriesCancelButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="32dp"
             android:text="@string/card_add_cancel_button"
             android:onClick="@{() -> seriesListEntityViewModel.onClickedButtonCancel()}"
-            app:layout_constraintBottom_toBottomOf="@+id/editSeriesAddCardButton"
+            app:layout_constraintBottom_toBottomOf="@+id/addSeriesAddCardButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editSeriesAddCardButton"
-            app:layout_constraintTop_toTopOf="@+id/editSeriesAddCardButton" />
+            app:layout_constraintStart_toEndOf="@+id/addSeriesAddCardButton"
+            app:layout_constraintTop_toTopOf="@+id/addSeriesAddCardButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

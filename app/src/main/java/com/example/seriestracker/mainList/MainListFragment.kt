@@ -61,6 +61,7 @@ class MainListFragment : Fragment() {
         observeMainListEntities(adapter)
         observeShowSnackbarEvent()
         observeNavigateToAddNewEntity()
+        observeNavigateToEditEntity()
         return binding.root
     }
 
@@ -82,6 +83,22 @@ class MainListFragment : Fragment() {
 
                 // Make sure to only navigate once, even if the device has a configuration change
                 viewModel.doneNavigatingToAddNewEntity()
+            }
+        })
+    }
+
+    private fun observeNavigateToEditEntity(){
+        viewModel.navigateToEditEntity.observe(this, Observer { entityId ->
+            if (entityId != -1L)
+            {
+                if (this.findNavController().currentDestination?.id == R.id.mainListFragment){
+                    this.findNavController().navigate(
+                        MainListFragmentDirections.actionMainListFragmentToEditSeriesListEntityFragment(entityId)
+                    )
+                }
+
+                // Make sure to only navigate once, even if the device has a configuration change
+                viewModel.doneNavigatingToEditEntity()
             }
         })
     }

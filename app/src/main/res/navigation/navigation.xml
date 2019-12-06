@@ -14,17 +14,30 @@
             android:id="@+id/action_mainFragment_to_addSeriesListEntityFragment"
             app:destination="@id/addSeriesListEntityFragment"
             app:popUpTo="@+id/mainListFragment" />
+        <action
+            android:id="@+id/action_mainListFragment_to_editSeriesListEntityFragment"
+            app:destination="@id/editSeriesListEntityFragment"
+            app:popUpTo="@+id/mainListFragment" />
     </fragment>
     <fragment
         android:id="@+id/addSeriesListEntityFragment"
         android:name="com.example.seriestracker.addSeriesListEntity.AddSeriesListEntityFragment"
         android:label="AddSeriesListEntityFragment"
         tools:layout="@layout/fragment_add_new_series_list_entity" >
-        <!--<argument
-            android:name="listEntityId"
-            app:argType="long" />-->
         <action
             android:id="@+id/action_addSeriesListEntityFragment_to_mainFragment"
             app:destination="@id/mainListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editSeriesListEntityFragment"
+        android:name="com.example.seriestracker.editSeriesListEntity.EditSeriesListEntityFragment"
+        android:label="EditSeriesListEntityFragment"
+        tools:layout="@layout/fragment_edit_series_list_entity">
+        <action
+            android:id="@+id/action_editSeriesListEntityFragment_to_mainListFragment"
+            app:destination="@id/mainListFragment" />
+        <argument
+            android:name="entityId"
+            app:argType="long" />
     </fragment>
 </navigation>
