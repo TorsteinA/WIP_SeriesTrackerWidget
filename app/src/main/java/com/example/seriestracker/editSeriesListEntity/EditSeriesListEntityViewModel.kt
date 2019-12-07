@@ -18,20 +18,19 @@ class EditSeriesListEntityViewModel(
     private var viewModelJob = Job()
     private var currentListEntityID = entityId
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-//    private var _title = MutableLiveData<String>()
-//    private val _extras = MutableLiveData<String>()
-//    private val _season = MutableLiveData<Int>()
-//    private val _episode = MutableLiveData<Int>()
-
-    private var _currentEntity = MutableLiveData<SeriesListEntity?>()
-    val currentEntity: LiveData<SeriesListEntity?>
-        get() = _currentEntity
-    fun doneEntiting() { _currentEntity.value = null }
-
+    private var _title = MutableLiveData<String>()
+    private val _extras = MutableLiveData<String>()
+    private val _season = MutableLiveData<Int>()
+    private val _episode = MutableLiveData<Int>()
     private var _initialEntityTitle = MutableLiveData<String>()
     val initialEntityTitle: LiveData<String>
         get() = _initialEntityTitle
     fun doneInitiatingTitle() { _initialEntityTitle.value = null }
+
+    private var _initialEntityExtras = MutableLiveData<String>()
+    val initialEntityExtras: LiveData<String>
+        get() = _initialEntityExtras
+    fun doneInitiatingExtras() { _initialEntityExtras.value = null }
 
 
 
@@ -44,30 +43,17 @@ class EditSeriesListEntityViewModel(
             withContext(Dispatchers.IO){
                 val entity = get(entityId)
                 if (entity != null){
-                    //_currentEntity.postValue(entity)
                     _initialEntityTitle.postValue(entity.title)
-                    Log.i("EditVM", "Entity not null $entity with title ${entity.title}" )
-//                    _title.postValue(entity.title)
-//                    Log.i("EditVM", "Title is ${_title.value} and ${entity.title}")
-//                    _extras.postValue(entity.extras)
-//                    _season.postValue(entity.season)
-//                    _episode.postValue(entity.episode)
+                    _initialEntityExtras.postValue(entity.extras)
                 }
             }
         }
-
     }
 
-
-//    fun setTitle(t: String) {_title.value = t}
-//    fun setExtras(x: String) {_extras.value = x}
-//    fun setSeason(s: Int) { _season.value = s}
-//    fun setEpisode(e: Int) { _episode.value = e}
-
-    fun setTitle(t: String) {_currentEntity.value?.title = t}
-    fun setExtras(x: String) {_currentEntity.value?.extras = x}
-    fun setSeason(s: Int) { _currentEntity.value?.season = s}
-    fun setEpisode(e: Int) { _currentEntity.value?.episode = e}
+    fun setTitle(t: String) {_title.value = t}
+    fun setExtras(x: String) {_extras.value = x}
+    fun setSeason(s: Int) { _season.value = s}
+    fun setEpisode(e: Int) { _episode.value = e}
 
     // Navigation back to main list
     private var _navigateToMainList = MutableLiveData<Boolean>()
@@ -84,11 +70,10 @@ class EditSeriesListEntityViewModel(
             withContext(Dispatchers.IO){
                 var newEntity = get(entityId)
                 if (newEntity != null) {
-//                    if (_title.value != null) newEntity.title = _title.value.toString()
-//                    if (_extras.value != null) newEntity.extras = _extras.value.toString()
-//                    if (_season.value != null) newEntity.season = _season.value!!
-//                    if (_episode.value != null) newEntity.episode = _episode.value!!
-                    newEntity.title = _currentEntity.value!!.title
+                    if (_title.value != null) newEntity.title = _title.value.toString()
+                    if (_extras.value != null) newEntity.extras = _extras.value.toString()
+                    if (_season.value != null) newEntity.season = _season.value!!
+                    if (_episode.value != null) newEntity.episode = _episode.value!!
                     update(newEntity)
                 }
             }

@@ -68,19 +68,18 @@ class EditSeriesListEntityFragment : Fragment()
     }
 
     private fun observeEntity() {
-//        viewModel.currentEntity.observe(this, Observer { entity ->
-//            if (entity != null) {
-//                editSeriesEnterTitle.setText(entity.title)
-//                Log.i("EditFrag","Entity not null. Tried setting title to ${entity.title}")
-//            }
-//            viewModel.doneEntiting()
-//        })
-
         viewModel.initialEntityTitle.observe(this, Observer { title ->
             if (title != null){
                 editSeriesEnterTitle.setText(title)
-                Log.i("EditFrag","Title not null. Tried setting title to $title")
             }
+            viewModel.doneInitiatingTitle()
+        })
+        
+        viewModel.initialEntityExtras.observe(this, Observer { extras ->
+            if (extras != null){
+                editSeriesEnterExtras.setText(extras)
+            }
+            viewModel.doneInitiatingExtras()
         })
 
     }
