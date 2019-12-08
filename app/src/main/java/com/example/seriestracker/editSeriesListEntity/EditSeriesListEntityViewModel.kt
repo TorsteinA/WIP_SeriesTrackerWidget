@@ -29,10 +29,7 @@ class EditSeriesListEntityViewModel(
     fun setExtras(x: String) {_extras.value = x}
     fun setSeason(s: Int) { _season.value = s}
     fun setEpisode(e: Int) { _episode.value = e}
-    fun toggleFinished(fin: Boolean) {
-        Log.i("EditVM","Toggling finish from ${_finished.value} to $fin")
-        _finished.value = fin
-    }
+    fun setFinished(fin: Boolean) { _finished.value = fin }
 
     // Initialize Title in EditText
     private var _initialEntityTitle = MutableLiveData<String>()

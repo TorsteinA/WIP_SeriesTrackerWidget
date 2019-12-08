@@ -75,6 +75,7 @@ class AddSeriesListEntityFragment : Fragment() {
         observeExtras()
         observeSeason()
         observeEpisode()
+        observeFinishedChip()
     }
 
     private fun observeTitle() {
@@ -123,5 +124,12 @@ class AddSeriesListEntityFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
+    }
+
+    private fun observeFinishedChip(){
+        seriesEntityFinishedChip.setOnClickListener {
+            val fin = seriesEntityFinishedChip.isChecked
+            viewModel.setFinished(fin)
+        }
     }
 }

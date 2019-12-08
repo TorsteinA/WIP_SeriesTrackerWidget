@@ -22,6 +22,7 @@ class AddSeriesListEntityViewModel(
     private val extras = MutableLiveData<String>()
     private val season = MutableLiveData<Int>()
     private val episode = MutableLiveData<Int>()
+    private val finished = MutableLiveData<Boolean>()
 
     init {
         // initialize values to be empty
@@ -29,12 +30,14 @@ class AddSeriesListEntityViewModel(
         extras.value = ""
         season.value = 0
         episode.value = 0
+        finished.value = false
     }
 
     fun setTitle(t: String) {title.value = t}
     fun setExtras(x: String) {extras.value = x}
     fun setSeason(s: Int) { season.value = s}
     fun setEpisode(e: Int) { episode.value = e}
+    fun setFinished(f: Boolean) {finished.value = f}
 
     private var _navigateToMainList = MutableLiveData<Boolean>()
     val navigateToMainList: LiveData<Boolean>
@@ -52,6 +55,7 @@ class AddSeriesListEntityViewModel(
                 newEntity.extras = extras.value.toString()
                 newEntity.season = season.value!!
                 newEntity.episode = episode.value!!
+                newEntity.finished = finished.value!!
                 currentListEntityID = insert(newEntity)
                 Log.i("AddSeriesListEntityVM","Added entity. From DB it's values are: ${database.get(currentListEntityID)}")
             }

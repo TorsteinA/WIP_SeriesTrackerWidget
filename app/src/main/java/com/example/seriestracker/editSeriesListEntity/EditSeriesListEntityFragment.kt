@@ -195,7 +195,7 @@ class EditSeriesListEntityFragment : Fragment()
     private fun observeFinishedChip(){
         seriesEntityFinishedChip.setOnClickListener {
             val fin = seriesEntityFinishedChip.isChecked
-            viewModel.toggleFinished(fin)
+            viewModel.setFinished(fin)
         }
     }
 }
