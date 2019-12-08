@@ -21,8 +21,7 @@ class AddSeriesListEntityFragment : Fragment() {
 
     lateinit var viewModel : AddSeriesListEntityViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View?
-    {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         val binding: FragmentAddNewSeriesListEntityBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_add_new_series_list_entity, container, false)
         val application = requireNotNull(this.activity).application
@@ -42,12 +41,20 @@ class AddSeriesListEntityFragment : Fragment() {
 
     // EditText's not available in OnCreateView, but are accessible in OnViewCreated.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        observeTitle()
-        observeExtras()
-        observeSeason()
-        observeEpisode()
+        observeEditValues()
+
+        // Set some unused elements to invisible    // TODO Implement needed things to remove this
+        setInivisibleElements()
     }
 
+    private fun setInivisibleElements(){
+        //addSeriesListingTypeText.visibility = View.INVISIBLE
+        addSeriesListingTypeHolder.visibility = View.INVISIBLE
+        //addSeriesFinishedText.visibility = View.INVISIBLE
+        seriesEntityFinishedChipGroup.visibility = View.INVISIBLE
+    }
+
+    // Observer for navigation
     private fun observeNavigationBackToMainList() {
         viewModel.navigateToMainList.observe(this, Observer {
             if (it == true) {
@@ -60,6 +67,14 @@ class AddSeriesListEntityFragment : Fragment() {
                 hideKeyboard()
             }
         })
+    }
+
+    // Observers for EditTexts
+    private fun observeEditValues(){
+        observeTitle()
+        observeExtras()
+        observeSeason()
+        observeEpisode()
     }
 
     private fun observeTitle() {

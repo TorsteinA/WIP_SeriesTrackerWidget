@@ -16,7 +16,6 @@ class EditSeriesListEntityViewModel(
 
     val database = datasource
     private var viewModelJob = Job()
-    private var currentListEntityID = entityId
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     // Entity data values
@@ -30,7 +29,6 @@ class EditSeriesListEntityViewModel(
     fun setExtras(x: String) {_extras.value = x}
     fun setSeason(s: Int) { _season.value = s}
     fun setEpisode(e: Int) { _episode.value = e}
-
 
     // Initialize Title in EditText
     private var _initialEntityTitle = MutableLiveData<String>()
@@ -57,9 +55,7 @@ class EditSeriesListEntityViewModel(
     fun doneInitiatingEpisode() { _initialiEntityEpisode.value = null }
 
 
-    init {
-        setInitialValues()
-    }
+    init { setInitialValues() }
 
     private fun setInitialValues(){
         uiScope.launch {
@@ -102,8 +98,20 @@ class EditSeriesListEntityViewModel(
         _navigateToMainList.value = true
     }
 
+    fun onClickedButtonDelete(){
+        uiScope.launch {
+            withContext(Dispatchers.IO){
+                val entity = get(entityId)
+                if (entity != null) { delete(entity) }
+            }
+        }
+
+        _navigateToMainList.value = true
+    }
+
+
     // Database functions
     private suspend fun get(entityId: Long) = withContext(Dispatchers.IO) { database.get(entityId)}
     private suspend fun update(entity: SeriesListEntity) = withContext(Dispatchers.IO) { database.update(entity) }
-
+    private suspend fun delete(entity: SeriesListEntity) = withContext(Dispatchers.IO) { database.delete(entity) }
 }

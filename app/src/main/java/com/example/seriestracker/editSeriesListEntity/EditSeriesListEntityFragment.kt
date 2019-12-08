@@ -17,6 +17,8 @@ import com.example.seriestracker.database.SeriesListEntityDatabase
 import com.example.seriestracker.databinding.FragmentEditSeriesListEntityBinding
 import com.example.seriestracker.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_edit_series_list_entity.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class EditSeriesListEntityFragment : Fragment()
 {
@@ -48,6 +50,17 @@ class EditSeriesListEntityFragment : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeEditValues()
         observeInitializeValues()
+
+        // Set some unused elements to invisible    // TODO Implement needed things to remove this
+        setInivisibleElements()
+    }
+
+    private fun setInivisibleElements(){
+            //editSeriesListingTypeText.visibility = View.INVISIBLE
+            editSeriesListingTypeHolder.visibility = View.INVISIBLE
+
+            //editSeriesFinishedText.visibility = View.INVISIBLE
+            seriesEntityFinishedChipGroup.visibility = View.INVISIBLE
     }
 
     // Observer for navigation

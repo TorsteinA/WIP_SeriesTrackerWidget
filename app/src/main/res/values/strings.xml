@@ -23,7 +23,7 @@
     <string name="card_add_add_card_button">Add Card</string>
     <string name="card_add_cancel_button">Cancel</string>
     <string name="card_edit_delete_button">Delete</string>
-    <string name="card_edit_edit_card_button">Edit Card</string>
+    <string name="card_edit_edit_card_button">Edit</string>
 
     <string name="dev_notes">
     Android Series app:

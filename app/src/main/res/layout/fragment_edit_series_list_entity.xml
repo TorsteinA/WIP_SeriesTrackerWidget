@@ -75,7 +75,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/editSeriesListingTypeHolder"
             app:layout_constraintEnd_toStartOf="@+id/editSeriesListingTypeHolder"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editSeriesListingTypeHolder" />
+            app:layout_constraintTop_toTopOf="@+id/editSeriesListingTypeHolder"
+            tools:visibility="visible" />
 
         <RadioGroup
             android:id="@+id/editSeriesListingTypeHolder"
@@ -86,20 +87,23 @@
             app:layout_constraintBottom_toTopOf="@+id/editSeriesEnterSeason"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/editSeriesListingTypeText"
-            app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterExtras">
+            app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterExtras"
+            tools:visibility="invisible">
 
             <RadioButton
                 android:id="@+id/radioButtonSPlusE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/add_card_listing_type_s_plus_e" />
+                android:text="@string/add_card_listing_type_s_plus_e"
+                tools:visibility="invisible" />
 
             <RadioButton
                 android:id="@+id/radioButtonEOnly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_card_listing_type_e_only" />
+                android:text="@string/add_card_listing_type_e_only"
+                tools:visibility="invisible" />
 
         </RadioGroup>
 
@@ -173,7 +177,8 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/seriesEntityFinishedChipGroup"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/seriesEntityFinishedChipGroup" />
+            app:layout_constraintTop_toTopOf="@+id/seriesEntityFinishedChipGroup"
+            tools:visibility="visible" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/seriesEntityFinishedChipGroup"
@@ -185,13 +190,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/editSeriesFinishedText"
-            app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterEpisode">
+            app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterEpisode"
+            tools:visibility="invisible">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/seriesEntityFinishedChip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:checkable="true" />
+                android:checkable="true"
+                tools:visibility="invisible" />
         </com.google.android.material.chip.ChipGroup>
 
         <Button
@@ -200,8 +207,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/card_edit_edit_card_button"
             android:onClick="@{() -> seriesListEntityViewModel.onClickedButtonEdit()}"
+            android:text="@string/card_edit_edit_card_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/editSeriesCancelButton"
             app:layout_constraintStart_toStartOf="parent"
@@ -212,13 +219,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/card_add_cancel_button"
+            android:layout_marginEnd="16dp"
             android:onClick="@{() -> seriesListEntityViewModel.onClickedButtonCancel()}"
+            android:text="@string/card_add_cancel_button"
             app:layout_constraintBottom_toBottomOf="@+id/editSeriesAddCardButton"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/editSeriesDeleteButton"
             app:layout_constraintStart_toEndOf="@+id/editSeriesAddCardButton"
             app:layout_constraintTop_toTopOf="@+id/editSeriesAddCardButton" />
+
+        <Button
+            android:id="@+id/editSeriesDeleteButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/card_edit_delete_button"
+            android:onClick="@{() -> seriesListEntityViewModel.onClickedButtonDelete()}"
+            app:layout_constraintBottom_toBottomOf="@+id/editSeriesCancelButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/editSeriesCancelButton"
+            app:layout_constraintTop_toTopOf="@+id/editSeriesCancelButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

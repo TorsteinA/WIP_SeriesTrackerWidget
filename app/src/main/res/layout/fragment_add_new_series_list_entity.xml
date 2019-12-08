@@ -26,7 +26,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <EditText
             android:id="@+id/addSeriesEnterTitle"
@@ -72,7 +73,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/addSeriesListingTypeHolder"
             app:layout_constraintEnd_toStartOf="@+id/addSeriesListingTypeHolder"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/addSeriesListingTypeHolder" />
+            app:layout_constraintTop_toTopOf="@+id/addSeriesListingTypeHolder"
+            tools:visibility="visible" />
 
         <RadioGroup
             android:id="@+id/addSeriesListingTypeHolder"
@@ -83,20 +85,23 @@
             app:layout_constraintBottom_toTopOf="@+id/addSeriesEnterSeason"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/addSeriesListingTypeText"
-            app:layout_constraintTop_toBottomOf="@+id/addSeriesEnterExtras">
+            app:layout_constraintTop_toBottomOf="@+id/addSeriesEnterExtras"
+            tools:visibility="visible">
 
             <RadioButton
                 android:id="@+id/radioButtonSPlusE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/add_card_listing_type_s_plus_e" />
+                android:text="@string/add_card_listing_type_s_plus_e"
+                tools:visibility="invisible" />
 
             <RadioButton
                 android:id="@+id/radioButtonEOnly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_card_listing_type_e_only" />
+                android:text="@string/add_card_listing_type_e_only"
+                tools:visibility="invisible" />
 
         </RadioGroup>
 
@@ -170,7 +175,8 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/seriesEntityFinishedChipGroup"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/seriesEntityFinishedChipGroup" />
+            app:layout_constraintTop_toTopOf="@+id/seriesEntityFinishedChipGroup"
+            tools:visibility="visible" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/seriesEntityFinishedChipGroup"
@@ -182,7 +188,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/addSeriesFinishedText"
-            app:layout_constraintTop_toBottomOf="@+id/addSeriesEnterEpisode">
+            app:layout_constraintTop_toBottomOf="@+id/addSeriesEnterEpisode"
+            tools:visibility="invisible">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/seriesEntityFinishedChip"

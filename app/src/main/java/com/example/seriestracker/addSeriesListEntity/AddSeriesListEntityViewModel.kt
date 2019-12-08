@@ -61,7 +61,6 @@ class AddSeriesListEntityViewModel(
     }
 
 
-
     // Database functions
     private suspend fun update(entity: SeriesListEntity) = withContext(Dispatchers.IO) { database.update(entity) }
     private suspend fun insert(entity: SeriesListEntity) : Long = withContext(Dispatchers.IO) { database.insert(entity) }
