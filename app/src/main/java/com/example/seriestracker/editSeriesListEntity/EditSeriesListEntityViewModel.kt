@@ -1,5 +1,4 @@
 package com.example.seriestracker.editSeriesListEntity
-import android.os.Debug
 import android.util.Log
 import kotlinx.coroutines.*
 import androidx.lifecycle.LiveData
@@ -23,12 +22,17 @@ class EditSeriesListEntityViewModel(
     private val _extras = MutableLiveData<String>()
     private val _season = MutableLiveData<Int>()
     private val _episode = MutableLiveData<Int>()
+    private val _finished = MutableLiveData<Boolean>()
 
     // Setters
     fun setTitle(t: String) {_title.value = t}
     fun setExtras(x: String) {_extras.value = x}
     fun setSeason(s: Int) { _season.value = s}
     fun setEpisode(e: Int) { _episode.value = e}
+    fun toggleFinished(fin: Boolean) {
+        Log.i("EditVM","Toggling finish from ${_finished.value} to $fin")
+        _finished.value = fin
+    }
 
     // Initialize Title in EditText
     private var _initialEntityTitle = MutableLiveData<String>()
@@ -54,6 +58,12 @@ class EditSeriesListEntityViewModel(
         get() = _initialiEntityEpisode
     fun doneInitiatingEpisode() { _initialiEntityEpisode.value = null }
 
+    // Initialize Finished in ChipGroup
+    private var _initialEntityFinished = MutableLiveData<Boolean>()
+    val initialEntityFinished: LiveData<Boolean>
+        get() = _initialEntityFinished
+    fun doneInitiatingFinished() { _initialEntityFinished.value = null }
+
 
     init { setInitialValues() }
 
@@ -66,6 +76,7 @@ class EditSeriesListEntityViewModel(
                     _initialEntityExtras.postValue(entity.extras)
                     _initialEntitySeason.postValue(entity.season.toString())
                     _initialiEntityEpisode.postValue(entity.episode.toString())
+                    _initialEntityFinished.postValue(entity.finished)
                 }
             }
         }
@@ -90,7 +101,9 @@ class EditSeriesListEntityViewModel(
                     if (_extras.value != null) newEntity.extras = _extras.value.toString()
                     if (_season.value != null) newEntity.season = _season.value!!
                     if (_episode.value != null) newEntity.episode = _episode.value!!
+                    if (_finished.value != null) newEntity.finished = _finished.value!!
                     update(newEntity)
+                    Log.i("EditVM","Edited Entity $newEntity")
                 }
             }
         }

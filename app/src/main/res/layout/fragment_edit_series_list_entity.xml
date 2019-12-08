@@ -202,14 +202,15 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/editSeriesFinishedText"
             app:layout_constraintTop_toBottomOf="@+id/editSeriesEnterEpisode"
-            tools:visibility="invisible">
+            tools:visibility="visible">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/seriesEntityFinishedChip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:checkable="true"
-                tools:visibility="invisible" />
+                android:checked="@{entity.finished}"
+                tools:visibility="visible" />
         </com.google.android.material.chip.ChipGroup>
 
         <Button

@@ -87,9 +87,5 @@ class MainListViewModel(
                 if (entity != null) database.update(entity)
             }
         }
-
-        // TODO if finished is true, change checkmark to small square icon, and if it's false, change to checkmark icon
-
-
     }
 }

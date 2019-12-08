@@ -17,8 +17,6 @@ import com.example.seriestracker.database.SeriesListEntityDatabase
 import com.example.seriestracker.databinding.FragmentEditSeriesListEntityBinding
 import com.example.seriestracker.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_edit_series_list_entity.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class EditSeriesListEntityFragment : Fragment()
 {
@@ -60,7 +58,7 @@ class EditSeriesListEntityFragment : Fragment()
             editSeriesListingTypeHolder.visibility = View.INVISIBLE
 
             //editSeriesFinishedText.visibility = View.INVISIBLE
-            seriesEntityFinishedChipGroup.visibility = View.INVISIBLE
+            //seriesEntityFinishedChipGroup.visibility = View.INVISIBLE
     }
 
     // Observer for navigation
@@ -84,12 +82,13 @@ class EditSeriesListEntityFragment : Fragment()
         observeInitializeValueExtras()
         observeInitializeValueSeason()
         observeInitializeValueEpisode()
+        observeInitializeValueFinished()
     }
 
     private fun observeInitializeValueTitle(){
         viewModel.initialEntityTitle.observe(this, Observer { title ->
             if (title != null){
-                Log.i("EditFrag","Setting Title to $title")
+                Log.i("EditFrag","InitFrag- Setting Title to $title")
                 editSeriesEnterTitle.setText(title)
                 viewModel.doneInitiatingTitle()
             }
@@ -99,7 +98,7 @@ class EditSeriesListEntityFragment : Fragment()
     private fun observeInitializeValueExtras(){
         viewModel.initialEntityExtras.observe(this, Observer { extras ->
             if (extras != null){
-                Log.i("EditFrag","Setting Extras to $extras")
+                Log.i("EditFrag","InitFrag- Setting Extras to $extras")
                 editSeriesEnterExtras.setText(extras)
                 viewModel.doneInitiatingExtras()
             }
@@ -109,7 +108,7 @@ class EditSeriesListEntityFragment : Fragment()
     private fun observeInitializeValueSeason(){
         viewModel.initialEntitySeason.observe(this, Observer { season ->
             if (season != null){
-                Log.i("EditFrag","Setting Season to $season")
+                Log.i("EditFrag","InitFrag- Setting Season to $season")
                 editSeriesEnterSeason.setText(season)
                 viewModel.doneInitiatingSeason()
             }
@@ -119,9 +118,19 @@ class EditSeriesListEntityFragment : Fragment()
     private fun observeInitializeValueEpisode(){
         viewModel.initialEntityEpisode.observe(this, Observer { episode ->
             if (episode != null){
-                Log.i("EditFrag","Setting Episode to $episode")
+                Log.i("EditFrag","InitFrag- Setting Episode to $episode")
                 editSeriesEnterEpisode.setText(episode)
                 viewModel.doneInitiatingEpisode()
+            }
+        })
+    }
+
+    private fun observeInitializeValueFinished(){
+        viewModel.initialEntityFinished.observe(this, Observer { fin ->
+            if (fin != null) {
+                Log.i("EditFrag", "InitFrag- Setting Finished to $fin")
+                seriesEntityFinishedChip.isChecked = fin
+                viewModel.doneInitiatingFinished()
             }
         })
     }
@@ -132,6 +141,7 @@ class EditSeriesListEntityFragment : Fragment()
         observeExtrasText()
         observeSeasonText()
         observeEpisodeText()
+        observeFinishedChip()
     }
 
     private fun observeTitleText() {
@@ -157,7 +167,7 @@ class EditSeriesListEntityFragment : Fragment()
         {
             override fun afterTextChanged(p0: Editable?)
             {
-                var seasonText = p0.toString()
+                val seasonText = p0.toString()
                 var seasonNum = 0
                 if (seasonText.isNotEmpty()) { seasonNum = seasonText.toInt() }
                 viewModel.setSeason(seasonNum)
@@ -172,7 +182,7 @@ class EditSeriesListEntityFragment : Fragment()
         {
             override fun afterTextChanged(p0: Editable?)
             {
-                var episodeText = p0.toString()
+                val episodeText = p0.toString()
                 var episodeNum = 0
                 if (episodeText.isNotEmpty()) { episodeNum = episodeText.toInt() }
                 viewModel.setEpisode(episodeNum)
@@ -180,5 +190,12 @@ class EditSeriesListEntityFragment : Fragment()
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
+    }
+
+    private fun observeFinishedChip(){
+        seriesEntityFinishedChip.setOnClickListener {
+            val fin = seriesEntityFinishedChip.isChecked
+            viewModel.toggleFinished(fin)
+        }
     }
 }

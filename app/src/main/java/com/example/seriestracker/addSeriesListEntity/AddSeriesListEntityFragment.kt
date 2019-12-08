@@ -51,7 +51,7 @@ class AddSeriesListEntityFragment : Fragment() {
         //addSeriesListingTypeText.visibility = View.INVISIBLE
         addSeriesListingTypeHolder.visibility = View.INVISIBLE
         //addSeriesFinishedText.visibility = View.INVISIBLE
-        seriesEntityFinishedChipGroup.visibility = View.INVISIBLE
+        //seriesEntityFinishedChipGroup.visibility = View.INVISIBLE
     }
 
     // Observer for navigation
