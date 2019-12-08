@@ -47,9 +47,10 @@ class EditSeriesListEntityFragment : Fragment()
     // EditText's not available in OnCreateView, but are accessible in OnViewCreated.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeEditValues()
-        observeInitializeEditValuesFromEntity()
+        observeInitializeValues()
     }
 
+    // Observer for navigation
     private fun observeNavigationBackToMainList() {
         viewModel.navigateToMainList.observe(this, Observer {
             if (it == true) {
@@ -64,7 +65,15 @@ class EditSeriesListEntityFragment : Fragment()
         })
     }
 
-    private fun observeInitializeEditValuesFromEntity() {
+    // Observers for initializing EditText values
+    private fun observeInitializeValues() {
+        observeInitializeValueTitle()
+        observeInitializeValueExtras()
+        observeInitializeValueSeason()
+        observeInitializeValueEpisode()
+    }
+
+    private fun observeInitializeValueTitle(){
         viewModel.initialEntityTitle.observe(this, Observer { title ->
             if (title != null){
                 Log.i("EditFrag","Setting Title to $title")
@@ -72,7 +81,9 @@ class EditSeriesListEntityFragment : Fragment()
                 viewModel.doneInitiatingTitle()
             }
         })
-        
+    }
+
+    private fun observeInitializeValueExtras(){
         viewModel.initialEntityExtras.observe(this, Observer { extras ->
             if (extras != null){
                 Log.i("EditFrag","Setting Extras to $extras")
@@ -80,7 +91,9 @@ class EditSeriesListEntityFragment : Fragment()
                 viewModel.doneInitiatingExtras()
             }
         })
+    }
 
+    private fun observeInitializeValueSeason(){
         viewModel.initialEntitySeason.observe(this, Observer { season ->
             if (season != null){
                 Log.i("EditFrag","Setting Season to $season")
@@ -88,7 +101,9 @@ class EditSeriesListEntityFragment : Fragment()
                 viewModel.doneInitiatingSeason()
             }
         })
+    }
 
+    private fun observeInitializeValueEpisode(){
         viewModel.initialEntityEpisode.observe(this, Observer { episode ->
             if (episode != null){
                 Log.i("EditFrag","Setting Episode to $episode")
@@ -96,9 +111,9 @@ class EditSeriesListEntityFragment : Fragment()
                 viewModel.doneInitiatingEpisode()
             }
         })
-
     }
 
+    // Observers for EditTexts
     private fun observeEditValues(){
         observeTitleText()
         observeExtrasText()

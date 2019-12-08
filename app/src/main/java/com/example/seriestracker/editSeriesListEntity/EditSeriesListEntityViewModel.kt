@@ -18,10 +18,19 @@ class EditSeriesListEntityViewModel(
     private var viewModelJob = Job()
     private var currentListEntityID = entityId
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+    // Entity data values
     private var _title = MutableLiveData<String>()
     private val _extras = MutableLiveData<String>()
     private val _season = MutableLiveData<Int>()
     private val _episode = MutableLiveData<Int>()
+
+    // Setters
+    fun setTitle(t: String) {_title.value = t}
+    fun setExtras(x: String) {_extras.value = x}
+    fun setSeason(s: Int) { _season.value = s}
+    fun setEpisode(e: Int) { _episode.value = e}
+
 
     // Initialize Title in EditText
     private var _initialEntityTitle = MutableLiveData<String>()
@@ -66,11 +75,6 @@ class EditSeriesListEntityViewModel(
         }
     }
 
-    fun setTitle(t: String) {_title.value = t}
-    fun setExtras(x: String) {_extras.value = x}
-    fun setSeason(s: Int) { _season.value = s}
-    fun setEpisode(e: Int) { _episode.value = e}
-
     // Navigation back to main list
     private var _navigateToMainList = MutableLiveData<Boolean>()
     val navigateToMainList: LiveData<Boolean>
@@ -98,12 +102,8 @@ class EditSeriesListEntityViewModel(
         _navigateToMainList.value = true
     }
 
-
-
     // Database functions
     private suspend fun get(entityId: Long) = withContext(Dispatchers.IO) { database.get(entityId)}
-    private suspend fun getListEntityWithId(entityId: Long) = withContext(Dispatchers.IO) { database.getListEntityWithId(entityId)}
     private suspend fun update(entity: SeriesListEntity) = withContext(Dispatchers.IO) { database.update(entity) }
-    private suspend fun insert(entity: SeriesListEntity) : Long = withContext(Dispatchers.IO) { database.insert(entity) }
 
 }
