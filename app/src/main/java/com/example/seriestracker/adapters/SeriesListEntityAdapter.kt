@@ -11,6 +11,7 @@ import com.example.seriestracker.ITEM_VIEW_TYPE_LIST_ENTITY_ITEM_E_ONLY
 import com.example.seriestracker.ITEM_VIEW_TYPE_LIST_ENTITY_ITEM_S_PLUS_E
 import com.example.seriestracker.R
 import com.example.seriestracker.database.SeriesListEntity
+import com.example.seriestracker.databinding.HeaderBinding
 import com.example.seriestracker.databinding.ListItemSeriesBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,8 @@ class SeriesListEntityAdapter(
     val slecListener: SeriesListEntityCheckmarkListener,
     val sletaListener: SeriesListEntityTextAreaListener,
     val slesListener: SeriesListEntitySeasonListener,
-    val sleeListener: SeriesListEntityEpisodeListener
+    val sleeListener: SeriesListEntityEpisodeListener,
+    val headerListener: SeriesListHeaderListener
 ) : ListAdapter<DataItem, RecyclerView.ViewHolder>(SeriesListEntityDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -41,6 +43,10 @@ class SeriesListEntityAdapter(
             is ViewHolder -> {
                 val listItem = getItem(position) as DataItem.SeriesListEntityItemSPlusE
                 holder.bind(listItem.seriesListEntity, slecListener, sletaListener, slesListener, sleeListener)
+            }
+            is TextViewHolder -> {
+                val header = getItem(position) as DataItem.Header
+                holder.bind(header, headerListener)
             }
         }
     }
@@ -92,6 +98,25 @@ class SeriesListEntityAdapter(
             }
         }
     }
+
+    class TextViewHolder private constructor(val binding: HeaderBinding): RecyclerView.ViewHolder(binding.root)
+    {
+        fun bind(
+            header: DataItem.Header,
+            headerListener: SeriesListHeaderListener
+        ) {
+            binding.header = header
+            binding.clickListener = headerListener
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): TextViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = HeaderBinding.inflate(layoutInflater, parent, false)
+                return TextViewHolder(binding)
+            }
+        }
+    }
 }
 
 class SeriesListEntityDiffCallback : DiffUtil.ItemCallback<DataItem>() {
@@ -125,6 +150,9 @@ class SeriesListEntityEpisodeListener(val clickListener: (entityId: Long) -> Uni
     fun onClickedEpisode(entity: SeriesListEntity) = clickListener(entity.entityId)
 }
 
+class SeriesListHeaderListener(val clickListener: (entityId: Long) -> Unit){
+    fun onClickedHeader(id: Long) = clickListener(id)
+}
 
 
 
@@ -143,16 +171,5 @@ sealed class DataItem
 
     object Header: DataItem() {
         override val id = Long.MIN_VALUE
-    }
-}
-
-class TextViewHolder(view: View): RecyclerView.ViewHolder(view)
-{
-    companion object {
-        fun from(parent: ViewGroup): TextViewHolder {
-            val layoutInflater = LayoutInflater.from(parent.context)
-            val view = layoutInflater.inflate(R.layout.header, parent, false)
-            return TextViewHolder(view)
-        }
     }
 }

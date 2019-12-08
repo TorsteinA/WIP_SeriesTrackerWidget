@@ -48,6 +48,8 @@ class MainListViewModel(
 
     fun onClickedCheckmark(entityId: Long) { onFinish(entityId) }
 
+    fun onClickedHeader() { onAddNewEntity() }
+
     private fun onIncrementEpisode(entityId: Long) {
         uiScope.launch {
             withContext(Dispatchers.IO){

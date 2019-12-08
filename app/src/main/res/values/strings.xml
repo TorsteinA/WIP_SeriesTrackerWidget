@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Series Tracker 0.0.2</string>
+    <string name="app_name">Series Tracker 0.0.3</string>
 
     <!-- For when app is opened -->
     <string name="in_app_message">This is a Widget App. \nPlease add it to your homescreen to use it</string>

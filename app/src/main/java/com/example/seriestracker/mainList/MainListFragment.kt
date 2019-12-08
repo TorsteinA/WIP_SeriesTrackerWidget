@@ -51,7 +51,10 @@ class MainListFragment : Fragment() {
             { entityId -> mainListViewModel.onClickedSeason( entityId ) },
 
             SeriesListEntityEpisodeListener
-            { entityId -> mainListViewModel.onClickedEpisode( entityId ) }
+            { entityId -> mainListViewModel.onClickedEpisode( entityId ) },
+
+            SeriesListHeaderListener
+            { mainListViewModel.onClickedHeader() }
         )
         binding.entityList.adapter = adapter
 
