@@ -22,16 +22,30 @@ class EditSeriesListEntityViewModel(
     private val _extras = MutableLiveData<String>()
     private val _season = MutableLiveData<Int>()
     private val _episode = MutableLiveData<Int>()
+
+    // Initialize Title in EditText
     private var _initialEntityTitle = MutableLiveData<String>()
     val initialEntityTitle: LiveData<String>
         get() = _initialEntityTitle
     fun doneInitiatingTitle() { _initialEntityTitle.value = null }
 
+    // Initialize Extras in EditText
     private var _initialEntityExtras = MutableLiveData<String>()
     val initialEntityExtras: LiveData<String>
         get() = _initialEntityExtras
     fun doneInitiatingExtras() { _initialEntityExtras.value = null }
 
+    // Initialize Season in EditText
+    private var _initialEntitySeason = MutableLiveData<String>()
+    val initialEntitySeason: LiveData<String>
+        get() = _initialEntitySeason
+    fun doneInitiatingSeason() { _initialEntitySeason.value = null }
+
+    // Initialize Episode in EditText
+    private var _initialiEntityEpisode = MutableLiveData<String>()
+    val initialEntityEpisode: LiveData<String>
+        get() = _initialiEntityEpisode
+    fun doneInitiatingEpisode() { _initialiEntityEpisode.value = null }
 
 
     init {
@@ -45,6 +59,8 @@ class EditSeriesListEntityViewModel(
                 if (entity != null){
                     _initialEntityTitle.postValue(entity.title)
                     _initialEntityExtras.postValue(entity.extras)
+                    _initialEntitySeason.postValue(entity.season.toString())
+                    _initialiEntityEpisode.postValue(entity.episode.toString())
                 }
             }
         }

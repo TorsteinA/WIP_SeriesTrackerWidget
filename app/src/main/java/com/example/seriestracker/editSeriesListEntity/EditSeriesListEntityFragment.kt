@@ -46,11 +46,8 @@ class EditSeriesListEntityFragment : Fragment()
 
     // EditText's not available in OnCreateView, but are accessible in OnViewCreated.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        observeTitle()
-        observeExtras()
-        observeSeason()
-        observeEpisode()
-        observeEntity()
+        observeEditValues()
+        observeInitializeEditValuesFromEntity()
     }
 
     private fun observeNavigationBackToMainList() {
@@ -67,24 +64,49 @@ class EditSeriesListEntityFragment : Fragment()
         })
     }
 
-    private fun observeEntity() {
+    private fun observeInitializeEditValuesFromEntity() {
         viewModel.initialEntityTitle.observe(this, Observer { title ->
             if (title != null){
+                Log.i("EditFrag","Setting Title to $title")
                 editSeriesEnterTitle.setText(title)
+                viewModel.doneInitiatingTitle()
             }
-            viewModel.doneInitiatingTitle()
         })
         
         viewModel.initialEntityExtras.observe(this, Observer { extras ->
             if (extras != null){
+                Log.i("EditFrag","Setting Extras to $extras")
                 editSeriesEnterExtras.setText(extras)
+                viewModel.doneInitiatingExtras()
             }
-            viewModel.doneInitiatingExtras()
+        })
+
+        viewModel.initialEntitySeason.observe(this, Observer { season ->
+            if (season != null){
+                Log.i("EditFrag","Setting Season to $season")
+                editSeriesEnterSeason.setText(season)
+                viewModel.doneInitiatingSeason()
+            }
+        })
+
+        viewModel.initialEntityEpisode.observe(this, Observer { episode ->
+            if (episode != null){
+                Log.i("EditFrag","Setting Episode to $episode")
+                editSeriesEnterEpisode.setText(episode)
+                viewModel.doneInitiatingEpisode()
+            }
         })
 
     }
 
-    private fun observeTitle() {
+    private fun observeEditValues(){
+        observeTitleText()
+        observeExtrasText()
+        observeSeasonText()
+        observeEpisodeText()
+    }
+
+    private fun observeTitleText() {
         editSeriesEnterTitle.addTextChangedListener(object : TextWatcher
         {
             override fun afterTextChanged(p0: Editable?) { viewModel.setTitle(p0.toString()) }
@@ -93,7 +115,7 @@ class EditSeriesListEntityFragment : Fragment()
         })
     }
 
-    private fun observeExtras() {
+    private fun observeExtrasText() {
         editSeriesEnterExtras.addTextChangedListener(object : TextWatcher
         {
             override fun afterTextChanged(p0: Editable?) { viewModel.setExtras(p0.toString()) }
@@ -102,7 +124,7 @@ class EditSeriesListEntityFragment : Fragment()
         })
     }
 
-    private fun observeSeason() {
+    private fun observeSeasonText() {
         editSeriesEnterSeason.addTextChangedListener(object : TextWatcher
         {
             override fun afterTextChanged(p0: Editable?)
@@ -117,7 +139,7 @@ class EditSeriesListEntityFragment : Fragment()
         })
     }
 
-    private fun observeEpisode() {
+    private fun observeEpisodeText() {
         editSeriesEnterEpisode.addTextChangedListener(object : TextWatcher
         {
             override fun afterTextChanged(p0: Editable?)
