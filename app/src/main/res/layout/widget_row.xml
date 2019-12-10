@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/widget_checkmark_button"
+        android:layout_width="30dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0"
+        android:adjustViewBounds="false"
+        android:contentDescription="@string/checkmark_description_string"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/list_item_finish_icon_square_png" />
+
+    <LinearLayout
+        android:id="@+id/widget_text_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/widget_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="top"
+            android:minHeight="20dp"
+            android:paddingStart="6dip"
+            android:paddingEnd="6dip"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="14sp"
+            tools:text="Hello, this is Patric " />
+
+        <TextView
+            android:id="@+id/widget_extra_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:gravity="center_vertical"
+            android:minHeight="20dp"
+            android:paddingStart="6dip"
+            android:paddingEnd="6dip"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="12sp"
+            tools:text="Hello, this is extraStuff " />
+
+    </LinearLayout>
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">-->
+
+    <LinearLayout
+        android:id="@+id/widget_season_area"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:gravity="center_vertical|end"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="0dp">
+
+        <TextView
+            android:id="@+id/widget_s_text"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:gravity="bottom"
+            android:paddingStart="0dp"
+            android:paddingEnd="8dp"
+            android:text="@string/season_s"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/widget_season_number"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:textSize="20sp"
+                tools:text="888" />
+
+            <ImageView
+                android:id="@+id/widget_number_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="0"
+                android:contentDescription="@string/divider_season_description_string"
+                app:srcCompat="@android:color/background_light" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/widget_episode_area"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:gravity="center_vertical|end"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <TextView
+            android:id="@+id/widget_e_text"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:gravity="bottom"
+            android:paddingStart="0dp"
+            android:paddingEnd="8dp"
+            android:text="@string/episode_e"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/widget_episode_number"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:textSize="20sp"
+                tools:text="888" />
+
+            <ImageView
+                android:id="@id/widget_number_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="0"
+                android:contentDescription="@string/divider_season_description_string"
+                app:srcCompat="@android:color/background_light" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!--    </LinearLayout>-->
+
+</LinearLayout>
